@@ -13,7 +13,11 @@ const DeckSchema = new Schema({
             definition: {type: String}
         }
 
-    ]
+    ],
+    user:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }
 });
 
 const Deck = mongoose.model("Deck",DeckSchema);
