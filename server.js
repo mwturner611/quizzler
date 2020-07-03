@@ -3,6 +3,8 @@ const path = require('path');
 const mongoose = require('mongoose');
 const PORT = process.env.PORT || 5000;
 const app = express();
+const routes = require('./routes/api/users');
+const router = express.Router();
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -18,19 +20,20 @@ mongoose
 	.then(() => console.log('connected to db...'))
 	.catch((err) => console.log(err));
 
-app.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname, './client/build/index.html'));
-});
+// app.get('*', (req, res) => {
+// 	res.sendFile(path.join(__dirname, './client/build/index.html'));
+// });
+// // routes here
+require('./routes/api/users')(app);
+// // app.get('/api/customers', (req, res) => {
+// // 	const customers = [
+// // 		{ id: 1, firstName: 'John', lastName: 'Doe' },
+// // 		{ id: 2, firstName: 'Brad', lastName: 'Cooper' },
+// // 		{ id: 3, firstName: 'Mary', lastName: 'Swanson' },
+// // 	];
 
-app.get('/api/customers', (req, res) => {
-	const customers = [
-		{ id: 1, firstName: 'John', lastName: 'Doe' },
-		{ id: 2, firstName: 'Brad', lastName: 'Cooper' },
-		{ id: 3, firstName: 'Mary', lastName: 'Swanson' },
-	];
-
-	res.json(customers);
-});
+// // 	res.json(customers);
+// });
 
 // listening here
 app.listen(PORT, () => {
