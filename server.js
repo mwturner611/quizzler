@@ -18,6 +18,10 @@ mongoose
 	.then(() => console.log('connected to db...'))
 	.catch((err) => console.log(err));
 
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, './client/build/index.html'));
+});
+
 app.get('/api/customers', (req, res) => {
 	const customers = [
 		{ id: 1, firstName: 'John', lastName: 'Doe' },
