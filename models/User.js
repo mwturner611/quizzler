@@ -21,8 +21,14 @@ const UserSchema = new Schema({
     },
     decks: [
         {
-            type: Schema.Types.ObjectId,
-            ref: "Deck"
+            name: String,
+            descr:String,
+            cards: [
+                {
+                    keyWord: {type:String},
+                    definition:{type:String}
+                }
+            ]
         }
     ]
 
