@@ -2,25 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
-	email: {
-		type: String,
-		unique: true,
-		required: 'Email is Required',
-		match: [/.+@.+\..+/, 'Please enter a valid e-mail address'],
-	},
-	password: {
-		type: String,
-		trim: true,
-		required: 'Password is Required',
-		validate: [
-			({ length }) => length >= 8,
-			'Password should be 8 characters or more.',
-		],
-	},
-	userCreated: {
-		type: Date,
-		default: Date.now,
-	},
+	email: { type: String, required: true, unique: true },
+	password: { type: String, required: true, minlength: 5 },
+	displayName: { type: String },
 	decks: [
 		{
 			name: String,
