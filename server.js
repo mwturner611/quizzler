@@ -22,6 +22,9 @@ mongoose
 	.then(() => console.log('connected to db...'))
 	.catch((err) => console.log(err));
 //==============================================
+require('./models/User');
+require('./models/Deck');
+require('./models/Card');
 
 // // routes here
 require('./routes/api/users')(app);

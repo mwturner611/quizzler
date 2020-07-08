@@ -1,11 +1,12 @@
+const Card = require('../../models/Card');
 const User = require('../../models/User');
 const Deck = require('../../models/Deck');
-const Card = require('../../models/Card');
-const db = require('../../models/index');
+
 const bcrypt = require('bcryptjs');
 const auth = require('../../middleware/auth');
 const jwt = require('jsonwebtoken');
 module.exports = (app) => {
+
 	// @ /api/users
 	// GET all users
 
@@ -152,19 +153,12 @@ module.exports = (app) => {
 
 	// Route for populating user decks and cards
 	app.get('/api/user/decks/:id', (req, res) => {
-		User.find({userID: req.params.id})
+		Deck.find({userID: req.params.id})
 		.populate('cards')
-		.exec(function (err, user) {
+		.exec(function (err, deck) {
 			if (err) console.log(err);
-			console.log(user)
-		})
-		// .then(result => {
-		// 	User.findOne({_id: req.params.id})
-		// 	.populate('decks')
-		// 	.then(result => res.json(result))
-		// })
-		// .then(result => res.json(result))
-		// .catch(err => console.log(err))
+			res.json(deck)
+		});
 	});
 
 };
