@@ -1,28 +1,83 @@
-.App {
-  text-align: center;
+* {
+	box-sizing: border-box;
+}
+.container {
+	max-width: 900px;
+	margin: 0 auto;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+a {
+	color: #3a4f77;
+	text-decoration: unset;
+}
+ul {
+	margin-left: 1.5rem;
+	list-style: none;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+button,
+input[type='submit'] {
+	border: none;
+	padding: 0.5em;
+	margin: 0.5em;
+	background: none;
+	color: unset;
+	cursor: pointer;
 }
 
-.App-title {
-  font-size: 1.5em;
+h,
+p,
+ul,
+ol {
+	margin: 1em, 0;
 }
 
-.App-intro {
-  font-size: large;
+/* Header styles */
+#header {
+	display: flex;
+	height: 50px;
+	justify-content: space-between;
+	align-items: center;
+	background-color: rgb(177, 17, 17);
 }
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+#header .title {
+	margin: 0;
+	color: #ffffff;
+	padding: 0 1rem;
+}
+#header .auth-buttons button {
+	background-color: rgb(177, 17, 17);
+	color: #ffffff;
+	padding: 0 1rem;
+	border: none;
+}
+#header .auth-buttons {
+	display: flex;
+	height: 100%;
+}
+.form label,
+.form input {
+	display: block;
+}
+.form input {
+	margin-bottom: 1rem;
+}
+.form label {
+	margin-bottom: 0.3rem;
+}
+.form input[type='text'],
+.form input[type='email'],
+.form input[type='password'] {
+	width: 35%;
+	padding: 0.5rem;
+}
+.page {
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+}
+#header .auth-buttons button:hover {
+	background-color: rgb(175, 12, 10);
+}
+@media screen and (max-width: 550px) {
 }

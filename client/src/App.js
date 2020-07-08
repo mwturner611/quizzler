@@ -41,7 +41,7 @@ function App() {
 	}, []);
 
 	return (
-		<>
+		<div>
 			<BrowserRouter>
 				<UserContext.Provider value={{ userData, setUserData }}>
 					<Header />
@@ -54,7 +54,7 @@ function App() {
 					</div>
 				</UserContext.Provider>
 			</BrowserRouter>
-		</>
+		</div>
 	);
 }
 
