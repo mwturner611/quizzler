@@ -99,15 +99,16 @@ module.exports = (app) => {
 		res.json(user);
 	});
 
-	// Route for updating user info
+	
+   // Route for updating user info
 	// Hard coded for now - needing change later (potential to update cards client side)
 	app.put('/users/:id', (req, res) => {
 		User.findOneAndUpdate({ _id: req.params.id }, 
 			{
 				decks: [
 					{
-						'name': 'Front End Languages',
-						'descr': 'Help with learning the front end languages of programming.',
+						'name': 'Frong End Code',
+						'descr': 'Helps you learn front end coding languages',
 						'cards': [
 							{
 								"keyWord": "HTML",
@@ -129,5 +130,24 @@ module.exports = (app) => {
 		.then(newDeck => res.json(newDeck))
 		.catch(err => console.log(err));
 	});
+
+
+	// add a new deck to the user's decks
+	app.put('/users/newDeck', (req,res) => {
+		User.update({_id: req.body.id}, 
+			{$push: {decks: {name:'Boy Bands', descr:'Learn the names of boy band members', cards:[]}}}
+			)
+			.then(newDeck => res.json(newDeck))
+			.catch(err => console.log(err));
+	});
+
+	// NOT WORKING YET - SHOULD add a card to a specific deck
+	app.put('/users/newCard', (req,res) => {
+		User.update({_id: req.body.id, decks: {_id: req.body.deckid}}, 
+		{$push: {cards: {keyWord:'NSYNC', definition: 'Justin Timberlake, Lance Bass, Chris Kirkpatrick, JC Chasez, Joey Fatone'}}}
+		)
+		.then(newDeck => res.json(newDeck))
+		.catch(err => console.log(err));
+	})
 
 };
