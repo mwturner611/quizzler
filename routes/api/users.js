@@ -102,75 +102,44 @@ module.exports = (app) => {
 		res.json(user);
 	});
 
-	// // Route for updating user info
-	// // Hard coded for now - needing change later (potential to update cards client side)
-	// app.put('/users/:id', (req, res) => {
-	// 	User.findOneAndUpdate({ _id: req.params.id }, 
-	// 		{
-	// 			decks: [
-	// 				{
-	// 					'name': 'Front End Languages',
-	// 					'descr': 'Help with learning the front end languages of programming.',
-	// 					'cards': [
-	// 						{
-	// 							"keyWord": "HTML",
-	// 							"definition": "Stands for Hyper Text Markup Language. The standard markup language for Web pages."
-	// 						},
-	// 						{
-	// 							"keyWord": "CSS",
-	// 							"definition": "Stands for Cascading Style Sheets. This describes how HTML elements are to be displayed on screen, paper, or in other media."
-	// 						},
-	// 						{
-	// 							"keyWord": "JavaScript",
-	// 							"definition": "Scripting or programming language that allows you to implement complex features on web pages."
-	// 						}
-	// 					]
-	// 				}
-	// 			]
-	// 		}
-	// 	)
-	// 	.then(newDeck => res.json(newDeck))
-	// 	.catch(err => console.log(err));
-	// });
-
 	// Route for creating new deck
-	// app.post('/api/deck', (req, res) => {
-	// 	Deck.create(req.body)
-	// 	.then(deck => res.json(deck))
-	// 	.catch(err => console.log(err))
-	// })
 	app.post('/api/deck/:id', (req, res) => {
-		// Deck.create({
-		// 	'name': req.body.name,
-		// 	'descr': req.body.descr,
-		// 	'cards': []
+		// const deck = new Deck;
+		// deck.name = req.body.name;
+		// deck.descr = req.body.descr;
+		// deck.save()
+		// // .then(deck => res.json(deck))
+		// .then(result => {
+		// 	User.findOne({_id: req.params.id}, (err, user) => {
+		// 		if(user) {
+		// 			user.decks.push(deck);
+		// 			user.save();
+		// 			res.json({ message: 'Deck created' });
+		// 		} else {
+		// 			console.log(err);
+		// 		}
+		// 	})
 		// })
-		const deck = new Deck;
-		deck.name = req.body.name;
-		deck.descr = req.body.descr;
-		deck.save()
-		// .then(deck => res.json(deck))
-		.then(result => {
-			User.findOne({_id: req.params.id}, (err, user) => {
-				if(user) {
-					user.decks.push(deck);
-					user.save();
-					res.json({ message: 'Deck created' });
-				} else {
-					console.log(err);
-				}
-			})
+		Deck.create({
+			'name': req.body.name,
+			'descr': req.body.descr,
+			'userID': req.params.id,
+			'cards': []
 		})
+		.then(deck => res.json(deck))
 		.catch(err => console.log(err));
 	});
 
 	// Route for creating new card
-	app.post('/api/card/:id', (req, res) => {
-		Card.create(req.body)
+	app.post('/api/card/:deck', (req, res) => {
+		const card = new Card;
+		card.keyWord = req.body.keyWord;
+		card.definition = req.body.definition;
+		card.save()
 		.then(result => {
-			Deck.findById(req.params.id, (err, deck) => {
+			Deck.findOne({_id: req.params.deck}, (err, deck) => {
 				if (deck) {
-					deck.cards.push(result);
+					deck.cards.push(card);
 					deck.save();
 					res.json({ message: 'Card created!' });
 				} else {
@@ -181,5 +150,21 @@ module.exports = (app) => {
 		.catch(err => console.log(err));
 	});
 
+	// Route for populating user decks and cards
+	app.get('/api/user/decks/:id', (req, res) => {
+		User.find({userID: req.params.id})
+		.populate('cards')
+		.exec(function (err, user) {
+			if (err) console.log(err);
+			console.log(user)
+		})
+		// .then(result => {
+		// 	User.findOne({_id: req.params.id})
+		// 	.populate('decks')
+		// 	.then(result => res.json(result))
+		// })
+		// .then(result => res.json(result))
+		// .catch(err => console.log(err))
+	});
 
 };

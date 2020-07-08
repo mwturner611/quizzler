@@ -22,12 +22,14 @@ mongoose
 	.then(() => console.log('connected to db...'))
 	.catch((err) => console.log(err));
 //==============================================
+
+// // routes here
+require('./routes/api/users')(app);
+
 // route to compile all jsx into REACT html
 app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname, './client/build/index.html'));
 });
-// // routes here
-require('./routes/api/users')(app);
 
 // listening here
 app.listen(PORT, () => {
