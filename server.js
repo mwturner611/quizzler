@@ -23,9 +23,9 @@ mongoose
 	.catch((err) => console.log(err));
 //==============================================
 // route to compile all jsx into REACT html
-// app.get('*', (req, res) => {
-// 	res.sendFile(path.join(__dirname, './client/build/index.html'));
-// });
+app.get('*', (req, res) => {
+	res.sendFile(path.join(__dirname, './client/build/index.html'));
+});
 // // routes here
 require('./routes/api/users')(app);
 
