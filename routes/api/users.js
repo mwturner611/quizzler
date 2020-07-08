@@ -92,9 +92,42 @@ module.exports = (app) => {
 			res.status(500).json({ error: err.message });
 		}
 	});
+
 	// find ONE user
 	app.get('/api/users', auth, async (req, res) => {
 		const user = await User.findById(req.user);
 		res.json(user);
 	});
+
+	// Route for updating user info
+	// Hard coded for now - needing change later (potential to update cards client side)
+	app.put('/users/:id', (req, res) => {
+		User.findOneAndUpdate({ _id: req.params.id }, 
+			{
+				decks: [
+					{
+						'name': 'Front End Languages',
+						'descr': 'Help with learning the front end languages of programming.',
+						'cards': [
+							{
+								"keyWord": "HTML",
+								"definition": "Stands for Hyper Text Markup Language. The standard markup language for Web pages."
+							},
+							{
+								"keyWord": "CSS",
+								"definition": "Stands for Cascading Style Sheets. This describes how HTML elements are to be displayed on screen, paper, or in other media."
+							},
+							{
+								"keyWord": "JavaScript",
+								"definition": "Scripting or programming language that allows you to implement complex features on web pages."
+							}
+						]
+					}
+				]
+			}
+		)
+		.then(newDeck => res.json(newDeck))
+		.catch(err => console.log(err));
+	});
+
 };
