@@ -105,22 +105,6 @@ module.exports = (app) => {
 
 	// Route for creating new deck
 	app.post('/api/deck/:id', (req, res) => {
-		// const deck = new Deck;
-		// deck.name = req.body.name;
-		// deck.descr = req.body.descr;
-		// deck.save()
-		// // .then(deck => res.json(deck))
-		// .then(result => {
-		// 	User.findOne({_id: req.params.id}, (err, user) => {
-		// 		if(user) {
-		// 			user.decks.push(deck);
-		// 			user.save();
-		// 			res.json({ message: 'Deck created' });
-		// 		} else {
-		// 			console.log(err);
-		// 		}
-		// 	})
-		// })
 		Deck.create({
 			'name': req.body.name,
 			'descr': req.body.descr,
