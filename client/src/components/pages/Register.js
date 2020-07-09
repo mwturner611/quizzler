@@ -2,33 +2,45 @@ import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
 import Axios from 'axios';
+import ErrorNotice from '../ErrorNotice';
 
 const Register = () => {
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
 	const [passwordcheck, setPasswordcheck] = useState();
 	const [displayName, setDisplayName] = useState();
+	const [error, setError] = useState('');
 	const { setUserData } = useContext(UserContext);
 	const history = useHistory();
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const newUser = { email, password, passwordcheck, displayName };
-		await Axios.post('http://localhost:3001/api/users/register', newUser);
-		const loginRes = await Axios.post('http://localhost:3001/api/users/login', {
-			email,
-			password,
-		});
-		setUserData({
-			token: loginRes.data.token,
-			user: loginRes.data.user,
-		});
-		localStorage.setItem('auth-token', loginRes.data.token);
-		history.push('/');
+		// console.log('error', err.response.data.msg);
+		try {
+			const newUser = { email, password, passwordcheck, displayName };
+			await Axios.post('http://localhost:3001/api/users/register', newUser);
+			const loginRes = await Axios.post('http://localhost:3001/api/users/login', {
+				email,
+				password,
+			});
+			setUserData({
+				token: loginRes.data.token,
+				user: loginRes.data.user,
+			});
+			localStorage.setItem('auth-token', loginRes.data.token);
+			history.push('/');
+			// catch block for handling sign-up/sign-in errors
+		} catch (err) {
+			err.response.data.msg && setError(err.response.data.msg);
+			console.log(err.response.data);
+		}
 	};
 
 	return (
 		<div className='page'>
 			<h2>Sign up here</h2>
+			{error && (
+				<ErrorNotice message={error} clearError={() => setError(undefined)} />
+			)}
 			<form className='form' onSubmit={handleSubmit}>
 				<label htmlFor='register-email'>Email</label>
 				<input
