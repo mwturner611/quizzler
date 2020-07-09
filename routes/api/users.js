@@ -1,12 +1,12 @@
 const Card = require('../../models/Card');
 const User = require('../../models/User');
 const Deck = require('../../models/Deck');
+require('dotenv').config();
 
 const bcrypt = require('bcryptjs');
 const auth = require('../../middleware/auth');
 const jwt = require('jsonwebtoken');
 module.exports = (app) => {
-
 	// @ /api/users
 	// GET all users
 
@@ -47,6 +47,7 @@ module.exports = (app) => {
 	// @ /api/users/login
 	// LOGIN one created user
 	app.post('/api/users/login', async (req, res) => {
+		console.log('hit');
 		try {
 			const { email, password } = req.body;
 			// validation
@@ -106,43 +107,43 @@ module.exports = (app) => {
 	// Route for creating new deck
 	app.post('/api/deck/:id', (req, res) => {
 		Deck.create({
-			'name': req.body.name,
-			'descr': req.body.descr,
-			'userID': req.params.id,
-			'cards': []
+			name: req.body.name,
+			descr: req.body.descr,
+			userID: req.params.id,
+			cards: [],
 		})
-		.then(deck => res.json(deck))
-		.catch(err => console.log(err));
+			.then((deck) => res.json(deck))
+			.catch((err) => console.log(err));
 	});
 
 	// Route for creating new card
 	app.post('/api/card/:deck', (req, res) => {
-		const card = new Card;
+		const card = new Card();
 		card.keyWord = req.body.keyWord;
 		card.definition = req.body.definition;
-		card.save()
-		.then(result => {
-			Deck.findOne({_id: req.params.deck}, (err, deck) => {
-				if (deck) {
-					deck.cards.push(card);
-					deck.save();
-					res.json({ message: 'Card created!' });
-				} else {
-					console.log(err);
-				}
+		card
+			.save()
+			.then((result) => {
+				Deck.findOne({ _id: req.params.deck }, (err, deck) => {
+					if (deck) {
+						deck.cards.push(card);
+						deck.save();
+						res.json({ message: 'Card created!' });
+					} else {
+						console.log(err);
+					}
+				});
 			})
-		})
-		.catch(err => console.log(err));
+			.catch((err) => console.log(err));
 	});
 
 	// Route for populating user decks and cards
 	app.get('/api/user/decks/:id', (req, res) => {
-		Deck.find({userID: req.params.id})
-		.populate('cards')
-		.exec(function (err, deck) {
-			if (err) console.log(err);
-			res.json(deck)
-		});
+		Deck.find({ userID: req.params.id })
+			.populate('cards')
+			.exec(function (err, deck) {
+				if (err) console.log(err);
+				res.json(deck);
+			});
 	});
-
 };

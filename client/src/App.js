@@ -22,12 +22,12 @@ function App() {
 				token = '';
 			}
 			const tokenRes = await Axios.post(
-				'http://localhost:5000/api/users/tokenIsValid',
+				'http://localhost:3001/api/users/tokenIsValid',
 				null,
 				{ headers: { 'x-auth-token': token } }
 			);
 			if (tokenRes.data) {
-				const userRes = await Axios.get('http://localhost:5000/api/users', {
+				const userRes = await Axios.get('http://localhost:3001/api/users', {
 					headers: { 'x-auth-token': token },
 				});
 				setUserData({

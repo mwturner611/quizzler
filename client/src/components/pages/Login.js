@@ -9,10 +9,11 @@ const Login = () => {
 	const history = useHistory();
 	// handle submit
 	const handleSubmit = async (e) => {
+		console.log('clicked');
 		e.preventDefault();
 		const loginUser = { email, password };
 		const loginRes = await Axios.post(
-			'http://localhost:5000/api/users/login',
+			'http://localhost:3001/api/users/login',
 			loginUser
 		);
 		setUserData({
