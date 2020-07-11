@@ -13,6 +13,7 @@ const auth = (req, res, next) => {
 				.status(401)
 				.json({ msg: 'token verification failed. Auth denied' });
 		// req.user = verified;
+		console.log('user id:', verified.id);
 		req.user = verified.id;
 		next();
 	} catch (err) {

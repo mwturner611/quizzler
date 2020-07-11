@@ -75,7 +75,7 @@ module.exports = (app) => {
 	});
 	// DELETE route
 	app.delete('/api/users/delete', auth, async (req, res) => {
-		// console.log(req.user);
+		console.log(req.user);
 		try {
 			const deletedUser = await User.findByIdAndDelete(req.user);
 			res.json(deletedUser);
@@ -105,11 +105,11 @@ module.exports = (app) => {
 	});
 
 	// Route for creating new deck
-	app.post('/api/deck/:id', (req, res) => {
+	app.post('/api/deck', auth, (req, res) => {
 		Deck.create({
 			name: req.body.name,
 			descr: req.body.descr,
-			userID: req.params.id,
+			userID: req.user,
 			cards: [],
 		})
 			.then((deck) => res.json(deck))
@@ -138,12 +138,22 @@ module.exports = (app) => {
 	});
 
 	// Route for populating user decks and cards
-	app.get('/api/user/decks/:id', (req, res) => {
-		Deck.find({ userID: req.params.id })
-			.populate('cards')
-			.exec(function (err, deck) {
-				if (err) console.log(err);
-				res.json(deck);
-			});
+	// app.get('/api/user/decks/:id', (req, res) => {
+	// 	Deck.find({ userID: req.params.id })
+	// 		.populate('cards')
+	// 		.exec(function (err, deck) {
+	// 			if (err) console.log(err);
+	// 			res.json(deck);
+	// 		});
+	// });
+
+	// find all decks associated with logged in user
+	// will use this in Useeffect on homepage to render decks
+	app.get('/api/user/decks', auth, (req, res) => {
+		Deck.find({
+			userID: req.user,
+		})
+			.then((deck) => res.json(deck))
+			.catch((err) => console.log(err));
 	});
 };
