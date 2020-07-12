@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Home from './components/pages/Home';
 import Login from './components/pages/Login';

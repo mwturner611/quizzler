@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Button } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../contexts/UserContext';
 
@@ -23,12 +24,17 @@ const AuthButtons = () => {
 	return (
 		<nav className='auth-buttons'>
 			{userData.user ? (
-				<button onClick={logout}>Log Out</button>
+				<Button color='warning' onClick={logout}>
+					Log Out
+				</Button>
 			) : (
 				<div>
-					<button onClick={register}>Register</button>
-					<button onClick={login}>Login</button>
-					<button></button>
+					<Button color='info' onClick={register}>
+						Register
+					</Button>
+					<Button color='info' onClick={login}>
+						Login
+					</Button>
 				</div>
 			)}
 		</nav>
