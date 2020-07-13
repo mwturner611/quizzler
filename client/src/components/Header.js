@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import AuthButtons from './AuthButtons';
+import { Navbar, NavbarBrand, Container } from 'reactstrap';
 
 const Header = () => {
 	return (
-		<header id='header'>
-			<Link to='/'>
-				<h1 className='title'>Quizzler</h1>
-			</Link>
-			<AuthButtons />
-		</header>
+		<Navbar color='dark' dark expand='sm' id='header'>
+			<Container>
+				<NavbarBrand href='/'>Quizzler</NavbarBrand>
+				<AuthButtons />
+			</Container>
+		</Navbar>
 	);
 };
 

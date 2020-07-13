@@ -45,16 +45,7 @@ ol {
 	color: #ffffff;
 	padding: 0 1rem;
 }
-#header .auth-buttons button {
-	background-color: rgb(177, 17, 17);
-	color: #ffffff;
-	padding: 0 1rem;
-	border: none;
-}
-#header .auth-buttons {
-	display: flex;
-	height: 100%;
-}
+
 .form label,
 .form input {
 	display: block;
@@ -76,8 +67,6 @@ ol {
 	display: flex;
 	flex-direction: column;
 }
-#header .auth-buttons button:hover {
-	background-color: rgb(175, 12, 10);
-}
+
 @media screen and (max-width: 550px) {
 }

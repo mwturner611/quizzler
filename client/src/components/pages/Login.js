@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
 import Axios from 'axios';
+import { Button } from 'reactstrap';
 const Login = () => {
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
@@ -39,7 +40,9 @@ const Login = () => {
 					type='password'
 					onChange={(e) => setPassword(e.target.value)}
 				/>
-				<input type='submit' value='Log in' />
+				<Button>
+					<input type='submit' value='Log in' />
+				</Button>
 			</form>
 		</div>
 	);
