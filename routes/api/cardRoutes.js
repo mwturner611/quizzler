@@ -81,6 +81,13 @@ module.exports = (app) => {
 			.catch((err) => console.log(err));
 	});
 
+	// Delete all decks from user
+	app.delete('/api/deck', auth, (req, res) => {
+		Deck.deleteMany({ userID: req.user })
+			.then(result => res.json(result))
+			.catch(err => console.log(err))
+	});
+
 	// Delete all cards from deck
 	app.delete('/api/cards/:deck', auth, (req, res) => {
 		Card.deleteMany({ deckID: req.params.deck })
