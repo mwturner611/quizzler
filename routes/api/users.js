@@ -145,4 +145,26 @@ module.exports = (app) => {
 			.then((deck) => res.json(deck))
 			.catch((err) => console.log(err));
 	});
+
+	// Routes for updating collection
+	// Update a user
+	app.put('/api/users', auth, (req, res) => {
+		User.findOneAndUpdate({ _id: req.user }, req.body, { new: true })
+			.then((user) => res.json(user))
+			.catch((err) => console.log(err));
+	});
+
+	// Update a deck
+	app.put('/api/deck/:deck', auth, (req, res) => {
+		Deck.findOneAndUpdate({ _id: req.params.deck }, req.body, { new: true })
+			.then((deck) => res.json(deck))
+			.catch((err) => console.log(err));
+	});
+
+	// Update a card
+	app.put('/api/card/:card', auth, (req, res) => {
+		Card.findOneAndUpdate({ _id: req.params.card }, req.body, { new: true })
+			.then((card) => res.json(card))
+			.catch((err) => console.log(err));
+	});
 };
