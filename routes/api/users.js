@@ -104,67 +104,10 @@ module.exports = (app) => {
 		res.json(user);
 	});
 
-	// Route for creating new deck
-	app.post('/api/deck', auth, (req, res) => {
-		Deck.create({
-			name: req.body.name,
-			descr: req.body.descr,
-			userID: req.user,
-			cards: [],
-		})
-			.then((deck) => res.json(deck))
-			.catch((err) => console.log(err));
-	});
-
-	// Route for creating new card
-	app.post('/api/card/:deck', auth, (req, res) => {
-		Card.create({
-			keyWord: req.body.keyWord,
-			definition: req.body.definition,
-			deckID: req.params.deck,
-		})
-			.then((card) => res.json(card))
-			.catch((err) => console.log(err));
-	});
-
-	// Route for finding all cards for a deck
-	app.get('/api/cards/:deck', auth, (req, res) => {
-		Card.find({
-			deckID: req.params.deck,
-		})
-			.then((cards) => res.json(cards))
-			.catch((err) => console.log(err));
-	});
-
-	// find all decks associated with logged in user
-	// will use this in Useeffect on homepage to render decks
-	app.get('/api/user/decks', auth, (req, res) => {
-		Deck.find({
-			userID: req.user,
-		})
-			.then((deck) => res.json(deck))
-			.catch((err) => console.log(err));
-	});
-
-	// Routes for updating collection
 	// Update a user
 	app.put('/api/users', auth, (req, res) => {
 		User.findOneAndUpdate({ _id: req.user }, req.body, { new: true })
 			.then((user) => res.json(user))
-			.catch((err) => console.log(err));
-	});
-
-	// Update a deck
-	app.put('/api/deck/:deck', auth, (req, res) => {
-		Deck.findOneAndUpdate({ _id: req.params.deck }, req.body, { new: true })
-			.then((deck) => res.json(deck))
-			.catch((err) => console.log(err));
-	});
-
-	// Update a card
-	app.put('/api/card/:card', auth, (req, res) => {
-		Card.findOneAndUpdate({ _id: req.params.card }, req.body, { new: true })
-			.then((card) => res.json(card))
 			.catch((err) => console.log(err));
 	});
 };
