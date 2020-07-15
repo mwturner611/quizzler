@@ -10,6 +10,8 @@ export default {
     getDeck: function(){
         return axios.get('/api/user/decks');
     },
+    // update a deck
+    // delete a deck
 
     // card calls
     // new card
@@ -20,5 +22,7 @@ export default {
     getCard: function(deckID){
         return axios.get('/api/cards/'+ deckID);
     },
+    // update card
+    // delete a card
     
 }

@@ -1,12 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import UserContext from '../../contexts/UserContext';
 import API from '../../utils/Api';
-import axios from 'axios';
-import List from '../List';
-import {ListGroup, ListGroupItem, Button} from 'reactstrap';
+import {ListGroup, ListGroupItem, Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import { useHistory } from 'react-router-dom';
-
-
 
 
 export default function Home() {
@@ -16,11 +12,12 @@ export default function Home() {
 
 	// save a new deck
 	function saveDeck(deck){
-		axios.post('/api/deck',{
-			name: deck.name,
-			descr: deck.descr,
+		API.createDeck({
+			name:deck.keyWord,
+			descr: deck.definition,
 			userID: deck.userID
 		})
+		.then(() => findDecks())
 		.catch(err => console.log(err));
 	};
 	// find decks
@@ -31,6 +28,10 @@ export default function Home() {
 			)
 			.catch(err => console.log(err));
 	};
+	// update a deck function
+
+
+	// delete a deck function
 
 	// go to a deck's card page
 	const cards = (ID) => {
@@ -59,10 +60,24 @@ export default function Home() {
 					   Name: {deck.name}   
 					   Descr: {deck.descr}
 					   <Button onClick={() => cards(deck._id)}>View Cards</Button>
+					   <Button>Delete Deck</Button>
 
 					   </ListGroupItem>
 					  
 					))}
+					<ListGroupItem>
+         			<Form inline>
+                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                         <Label for="Keyword" className="mr-sm-2">Keyword</Label>
+                         <Input type="email" name="email" id="keyword" placeholder="New KeyWord" />
+                    </FormGroup>
+                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                         <Label for="examplePassword" className="mr-sm-2">Definition</Label>
+                        <Input type="email" name="definition" id="definition" placeholder="New Definition" />
+                    </FormGroup>
+                    <Button>Add New Card</Button>
+                    </Form>
+                    </ListGroupItem>
 				
 				</ListGroup>
 				</div>
