@@ -10,7 +10,7 @@ const DeckSchema = new Schema({
 		type: String,
 		required: true,
 	},
-	userID: { type: Schema.Types.ObjectId, ref: 'User' }
+	userID: { type: String}
 });
 
 module.exports = Deck = mongoose.model('Deck', DeckSchema);

@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
 import Axios from 'axios';
 import { Button } from 'reactstrap';
+import setAuthToken from '../../utils/setAuthToken';
 const Login = () => {
 	const [email, setEmail] = useState();
 	const [password, setPassword] = useState();
@@ -21,6 +22,7 @@ const Login = () => {
 			token: loginRes.data.token,
 			user: loginRes.data.user,
 		});
+		setAuthToken(loginRes.data.token);
 		localStorage.setItem('auth-token', loginRes.data.token);
 		history.push('/');
 	};
