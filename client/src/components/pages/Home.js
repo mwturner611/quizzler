@@ -3,23 +3,41 @@ import UserContext from '../../contexts/UserContext';
 import API from '../../utils/Api';
 import {ListGroup, ListGroupItem, Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import { useHistory } from 'react-router-dom';
+import setAuthToken from '../../utils/setAuthToken';
 
 
 export default function Home() {
 	const { userData } = useContext(UserContext);
+	const userID = userData.user;
 	const [userDecks, setDecks] = useState([]);
 	const history = useHistory();
+	const [newTitle, setNewTitle] = useState([]);
+	const [newDescr, setNewDescr] = useState([]);
+	const newDeck = {name: newTitle,descr:newDescr};
+	
+
 
 	// save a new deck
 	function saveDeck(deck){
 		API.createDeck({
-			name:deck.keyWord,
-			descr: deck.definition,
-			userID: deck.userID
+			name:deck.name,
+			descr: deck.descr
+			// userID: deck.userID
 		})
 		.then(() => findDecks())
 		.catch(err => console.log(err));
 	};
+
+	function handleTitleChange(event){
+		const entered = event.target.value;
+		setNewTitle(entered)
+	};
+
+	function handleDescrChange(event){
+		const entered = event.target.value;
+		setNewDescr(entered)
+	};
+
 	// find decks
 	function findDecks(){
 		API.getDeck()
@@ -52,7 +70,6 @@ export default function Home() {
 			{userData.user ? (
 				<div>
 				<h1>Welcome {userData.user.displayName}</h1>
-				<button onClick={() => findDecks()}>Retrieve test deck</button>
 				<h4>Your Decks</h4>
 				<ListGroup>
 					{userDecks.map (deck => (
@@ -68,14 +85,14 @@ export default function Home() {
 					<ListGroupItem>
          			<Form inline>
                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                         <Label for="Keyword" className="mr-sm-2">Keyword</Label>
-                         <Input type="email" name="email" id="keyword" placeholder="New KeyWord" />
+                         <Label for="Keyword" className="mr-sm-2">Name</Label>
+                         <Input onChange={handleTitleChange} type="email" name="email" id="keyword" placeholder="Title the deck" />
                     </FormGroup>
                      <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                          <Label for="examplePassword" className="mr-sm-2">Definition</Label>
-                        <Input type="email" name="definition" id="definition" placeholder="New Definition" />
+                        <Input onChange={handleDescrChange} type="email" name="definition" id="definition" placeholder="Describe the deck" />
                     </FormGroup>
-                    <Button>Add New Card</Button>
+                    <Button onClick={() => saveDeck(newDeck)}>Add New Deck</Button>
                     </Form>
                     </ListGroupItem>
 				

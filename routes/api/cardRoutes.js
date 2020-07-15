@@ -14,7 +14,7 @@ module.exports = (app) => {
 		Deck.create({
 			name: req.body.name,
 			descr: req.body.descr,
-			userID: req.body.userID
+			userID: req.user
 			
 		})
 			.then((deck) => res.json(deck))
