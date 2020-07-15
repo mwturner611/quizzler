@@ -3,11 +3,16 @@ import UserContext from '../../contexts/UserContext';
 import API from '../../utils/Api';
 import axios from 'axios';
 import List from '../List';
-import {ListGroup, ListGroupItem} from 'reactstrap';
+import {ListGroup, ListGroupItem, Button} from 'reactstrap';
+import { useHistory } from 'react-router-dom';
+
+
+
 
 export default function Home() {
 	const { userData } = useContext(UserContext);
 	const [userDecks, setDecks] = useState([]);
+	const history = useHistory();
 
 	// save a new deck
 	function saveDeck(deck){
@@ -28,7 +33,12 @@ export default function Home() {
 	};
 
 	// go to a deck's card page
-
+	const cards = (ID) => {
+		history.push({
+		pathname:'/cards',
+		state:{deckID: ID}
+	})
+	}
 
 	// bring up the user's decks on entering page
 	useEffect(() => {
@@ -45,11 +55,13 @@ export default function Home() {
 				<h4>Your Decks</h4>
 				<ListGroup>
 					{userDecks.map (deck => (
-					  <List 
-					   name={deck.name}
-					   descr={deck.descr}
-					   key={deck._id}
-					  />
+					  <ListGroupItem>	  
+					   Name: {deck.name}   
+					   Descr: {deck.descr}
+					   <Button onClick={() => cards(deck._id)}>View Cards</Button>
+
+					   </ListGroupItem>
+					  
 					))}
 				
 				</ListGroup>
