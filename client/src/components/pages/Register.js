@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
 import Axios from 'axios';
 import ErrorNotice from '../ErrorNotice';
+import setAuthToken from '../../utils/setAuthToken';
 
 const Register = () => {
 	const [email, setEmail] = useState();
@@ -26,6 +27,7 @@ const Register = () => {
 				token: loginRes.data.token,
 				user: loginRes.data.user,
 			});
+			setAuthToken(loginRes.data.token);
 			localStorage.setItem('auth-token', loginRes.data.token);
 			history.push('/');
 			// catch block for handling sign-up/sign-in errors

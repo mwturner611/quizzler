@@ -1,16 +1,15 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import UserContext from '../../contexts/UserContext';
 import API from '../../utils/Api';
 import axios from 'axios';
+import List from '../List';
+import {ListGroup, ListGroupItem} from 'reactstrap';
 
 export default function Home() {
 	const { userData } = useContext(UserContext);
-	const testDeck = {
-		name:'NEWtestDeck',
-		descr:'This is a NEW descr.',
-		userID: '5f0da396d12a5029c5796843'
-	}
+	const [userDecks, setDecks] = useState([]);
 
+	// save a new deck
 	function saveDeck(deck){
 		axios.post('/api/deck',{
 			name: deck.name,
@@ -18,19 +17,23 @@ export default function Home() {
 			userID: deck.userID
 		})
 		.catch(err => console.log(err));
-	}
-	function findDecks(ID){
-
-		API.getDeck(ID)
+	};
+	// find decks
+	function findDecks(){
+		API.getDeck()
 		.then(res => 
-			console.log(res.data)
+			setDecks(res.data)
 			)
 			.catch(err => console.log(err));
-	}
+	};
 
-	// useEffect(() => {
-	// 	saveDeck(testDeck)
-	// }, []);
+	// go to a deck's card page
+
+
+	// bring up the user's decks on entering page
+	useEffect(() => {
+	 	findDecks()
+	}, []);
 	
 
 	return (
@@ -38,8 +41,18 @@ export default function Home() {
 			{userData.user ? (
 				<div>
 				<h1>Welcome {userData.user.displayName}</h1>
-				<button onClick={() => saveDeck(testDeck)}>Save test deck</button>
-				<button onClick={() => findDecks(testDeck)}>Retrieve test deck</button>
+				<button onClick={() => findDecks()}>Retrieve test deck</button>
+				<h4>Your Decks</h4>
+				<ListGroup>
+					{userDecks.map (deck => (
+					  <List 
+					   name={deck.name}
+					   descr={deck.descr}
+					   key={deck._id}
+					  />
+					))}
+				
+				</ListGroup>
 				</div>
 			) : (
 				<div>
