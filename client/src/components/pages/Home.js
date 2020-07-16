@@ -22,17 +22,18 @@ export default function Home() {
 		API.createDeck({
 			name:deck.name,
 			descr: deck.descr
-			// userID: deck.userID
 		})
 		.then(() => findDecks())
 		.catch(err => console.log(err));
 	};
 
+	// collect what's entered in title field set state
 	function handleTitleChange(event){
 		const entered = event.target.value;
 		setNewTitle(entered)
 	};
 
+	// collect what's entered in descr. field and set state
 	function handleDescrChange(event){
 		const entered = event.target.value;
 		setNewDescr(entered)
@@ -50,20 +51,37 @@ export default function Home() {
 
 
 	// delete a deck function
+	function removeDeck(deckID){
+		API.deleteDeck(deckID)
+		.then(() => findDecks())
+		.catch(err => console.log(err));
+	};
+	
 
 	// go to a deck's card page
-	const cards = (ID) => {
+	const cards = (deck) => {
 		history.push({
 		pathname:'/cards',
-		state:{deckID: ID}
+		state:{deckID: deck._id, name: deck.name}
 	})
-	}
+	};
+	// go to review page
+	const review = (deck) => {
+		history.push({
+		pathname:'/review',
+		state:{deckID: deck._id, name: deck.name}
+	})
+	};
 
 	// bring up the user's decks on entering page
 	useEffect(() => {
+		setAuthToken(userData.token);
+	}, []);
+
+	useEffect(() => {
 	 	findDecks()
 	}, []);
-	
+
 
 	return (
 		<div className='page'>
@@ -76,8 +94,9 @@ export default function Home() {
 					  <ListGroupItem>	  
 					   Name: {deck.name}   
 					   Descr: {deck.descr}
-					   <Button onClick={() => cards(deck._id)}>View Cards</Button>
-					   <Button>Delete Deck</Button>
+					   <Button onClick={() => cards(deck)}>Edit Cards</Button>
+					   <Button onClick={() => review(deck)}>Review Deck</Button>
+					   <Button onClick={() => removeDeck(deck._id)}>Delete Deck</Button>
 
 					   </ListGroupItem>
 					  
@@ -89,7 +108,7 @@ export default function Home() {
                          <Input onChange={handleTitleChange} type="email" name="email" id="keyword" placeholder="Title the deck" />
                     </FormGroup>
                      <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                         <Label for="examplePassword" className="mr-sm-2">Definition</Label>
+                         <Label for="examplePassword" className="mr-sm-2">Description</Label>
                         <Input onChange={handleDescrChange} type="email" name="definition" id="definition" placeholder="Describe the deck" />
                     </FormGroup>
                     <Button onClick={() => saveDeck(newDeck)}>Add New Deck</Button>

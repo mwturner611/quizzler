@@ -11,19 +11,30 @@ export default {
         return axios.get('/api/user/decks');
     },
     // update a deck
+    updateDeck: function(deckID,deckData){
+        return axios.put('/api/deck/'+deckID,deckData);
+    },
     // delete a deck
-    
+    deleteDeck: function(deckID){
+        return axios.delete('/api/deck/'+deckID);
+    },
 
     // card calls
     // new card
-    createCard: function(cardData){
-        return axios.post('/api/card/:deck',cardData);
+    createCard: function(deckID,cardData){
+        return axios.post('/api/card/'+ deckID,cardData);
     },
     // get all cards
     getCard: function(deckID){
         return axios.get('/api/cards/'+ deckID);
     },
     // update card
+    updateCard: function(cardID,cardData){
+        return axios.put('/api/card/'+cardID, cardData);
+    },
     // delete a card
+    deleteCard: function(cardID){
+        return axios.delete('/api/card/'+cardID);
+    }
     
 }
