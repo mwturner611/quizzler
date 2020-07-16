@@ -65,6 +65,13 @@ export default function Home() {
 		state:{deckID: deck._id, name: deck.name}
 	})
 	};
+	// go to review page
+	const review = (deck) => {
+		history.push({
+		pathname:'/review',
+		state:{deckID: deck._id, name: deck.name}
+	})
+	};
 
 	// bring up the user's decks on entering page
 	useEffect(() => {
@@ -87,7 +94,8 @@ export default function Home() {
 					  <ListGroupItem>	  
 					   Name: {deck.name}   
 					   Descr: {deck.descr}
-					   <Button onClick={() => cards(deck)}>View Cards</Button>
+					   <Button onClick={() => cards(deck)}>Edit Cards</Button>
+					   <Button onClick={() => review(deck)}>Review Deck</Button>
 					   <Button onClick={() => removeDeck(deck._id)}>Delete Deck</Button>
 
 					   </ListGroupItem>

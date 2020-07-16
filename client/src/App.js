@@ -7,6 +7,7 @@ import Home from './components/pages/Home';
 import Login from './components/pages/Login';
 import Register from './components/pages/Register';
 import Cards from './components/pages/Cards';
+import Review from './components/pages/Review';
 import Header from './components/Header';
 import UserContext from './contexts/UserContext';
 
@@ -53,6 +54,7 @@ function App() {
 							<Route path='/register' component={Register} />
 							<Route path='/login' component={Login} />
 							<Route path='/cards' component={Cards} />
+							<Route path='/review' component={Review} />
 						</Switch>
 					</div>
 				</UserContext.Provider>
