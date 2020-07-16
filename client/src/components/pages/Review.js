@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import UserContext from '../../contexts/UserContext';
 import API from '../../utils/Api';
 import {ListGroup, ListGroupItem,  Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import CardTester from '../CardTester/CardTester';
 
 export default function Review(props){
     const [cards, setCards] = useState([]);
@@ -57,6 +58,12 @@ export default function Review(props){
             {currentCard.keyWord}
             {currentCard.definition}
             <Button onClick={() => previousItem()}>Previous Card</Button>
+            {cards.map(card => (
+                <CardTester 
+                keyword={card.keyWord}
+                definition={card.definition}
+                />
+            ))}
         </div>
     )
 
