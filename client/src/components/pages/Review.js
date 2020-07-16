@@ -58,7 +58,12 @@ export default function Review(props){
             {currentCard.keyWord}
             {currentCard.definition}
             <Button onClick={() => previousItem()}>Previous Card</Button>
-            
+            {cards.map(card => (
+                <CardTester 
+                keyword={card.keyWord}
+                definition={card.definition}
+                />
+            ))}
         </div>
     )
 
