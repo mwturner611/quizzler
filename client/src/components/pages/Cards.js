@@ -18,6 +18,12 @@ export default function Card(props) {
             .catch(err => console.log(err));
     };
 
+    	// delete a deck function
+	function removeCard(cardID){
+		API.deleteCard(cardID)
+		.then(() => findCards(deckID))
+		.catch(err => console.log(err));
+	};
     // function addCard(cardData){
 	// 	API.createCard({
 	// 		keyWord:cardData.keyWord,
@@ -61,7 +67,7 @@ export default function Card(props) {
                         <Input type="email" name="definition" id="definition" placeholder={card.definition} />
                     </FormGroup>
                     <Button>Update</Button>
-                    <Button>Delete</Button>
+                    <Button onClick={() => removeCard(card._id)}>Delete</Button>
                     </Form>
                     </ListGroupItem>
     ))}
