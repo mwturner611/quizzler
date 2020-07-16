@@ -6,9 +6,10 @@ import {ListGroup, ListGroupItem,  Button, Form, FormGroup, Label, Input} from '
 export default function Card(props) {
     const [cards, setCards] = useState([]);
     const deckID = props.location.state.deckID;
-    // const [newKeyWord, setNewKeyWord] = useState([]);
-	// const [newDefinition, setNewDefinition] = useState([]);
-	// const newCard = {KeyWord: newKeyWord,definition:newDefinition,deckID:deckID};
+    const deckName = props.location.state.name;
+    const [newKeyWord, setNewKeyWord] = useState([]);
+	const [newDefinition, setNewDefinition] = useState([]);
+    const newCard = {keyWord: newKeyWord,definition:newDefinition};
 
     function findCards(deckID){
         API.getCard(deckID)
@@ -23,29 +24,28 @@ export default function Card(props) {
 		API.deleteCard(cardID)
 		.then(() => findCards(deckID))
 		.catch(err => console.log(err));
+    };
+    
+    function addCard(deckID,cardData){
+		API.createCard(deckID,{
+			keyWord:cardData.keyWord,
+			definition: cardData.definition
+		})
+		.then(() => findCards(deckID))
+		.catch(err => console.log(err));
+    };
+
+    function handleKeyWordChange(event){
+		const entered = event.target.value;
+		setNewKeyWord(entered)
 	};
-    // function addCard(cardData){
-	// 	API.createCard({
-	// 		keyWord:cardData.keyWord,
-	// 		definition: cardData.definition,
-	// 		deckID: cardData.deckID
-	// 	})
-	// 	.then(() => findCards(deckID))
-	// 	.catch(err => console.log(err));
-    // };
 
-    // function handleKeyWordChange(event){
-	// 	const entered = event.target.value;
-	// 	setNewKeyWord(entered)
-	// };
-
-	// function handleDefinitionChange(event){
-	// 	const entered = event.target.value;
-	// 	setNewDefinition(entered)
-	// };
+	function handleDefinitionChange(event){
+		const entered = event.target.value;
+		setNewDefinition(entered)
+	};
     
 //    update a card function
-//  delete a card function
 
     useEffect(() => {
         findCards(deckID)
@@ -53,7 +53,7 @@ export default function Card(props) {
 
     return(
         <div>
-            <h1>Cards Page</h1>
+            <h1>{deckName}: Cards</h1>
             <ListGroup>
                 {cards.map (card => (
                 <ListGroupItem>    
@@ -71,7 +71,7 @@ export default function Card(props) {
                     </Form>
                     </ListGroupItem>
     ))}
-    {/* <ListGroupItem>    
+    <ListGroupItem>    
                 <Form inline>
                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                          <Label for="Keyword" className="mr-sm-2">Keyword</Label>
@@ -81,9 +81,9 @@ export default function Card(props) {
                          <Label for="examplePassword" className="mr-sm-2">Definition</Label>
                         <Input onChange={handleDefinitionChange} type="input" name="definition" id="definition" placeholder="New Definition" />
                     </FormGroup>
-                    <Button onClick={() => addCard(newCard)}>Add New Card</Button>
+                    <Button onClick={() => addCard(deckID,newCard)}>Add New Card</Button>
                     </Form>
-                    </ListGroupItem> */}
+                    </ListGroupItem>
     </ListGroup>
         </div>
   );

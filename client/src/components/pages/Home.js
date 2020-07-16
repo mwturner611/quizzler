@@ -59,10 +59,10 @@ export default function Home() {
 	
 
 	// go to a deck's card page
-	const cards = (ID) => {
+	const cards = (deck) => {
 		history.push({
 		pathname:'/cards',
-		state:{deckID: ID}
+		state:{deckID: deck._id, name: deck.name}
 	})
 	};
 
@@ -87,7 +87,7 @@ export default function Home() {
 					  <ListGroupItem>	  
 					   Name: {deck.name}   
 					   Descr: {deck.descr}
-					   <Button onClick={() => cards(deck._id)}>View Cards</Button>
+					   <Button onClick={() => cards(deck)}>View Cards</Button>
 					   <Button onClick={() => removeDeck(deck._id)}>Delete Deck</Button>
 
 					   </ListGroupItem>
