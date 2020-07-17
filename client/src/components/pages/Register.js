@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
-import Axios from 'axios';
 import ErrorNotice from '../ErrorNotice';
 import setAuthToken from '../../utils/setAuthToken';
+import API from '../../utils/Api';
 
 const Register = () => {
 	const [email, setEmail] = useState();
@@ -18,11 +18,8 @@ const Register = () => {
 		// console.log('error', err.response.data.msg);
 		try {
 			const newUser = { email, password, passwordcheck, displayName };
-			await Axios.post('http://localhost:3001/api/users/register', newUser);
-			const loginRes = await Axios.post('http://localhost:3001/api/users/login', {
-				email,
-				password,
-			});
+			await API.postUserRegister(newUser);
+			const loginRes = await API.postNewUser(email,password);
 			setUserData({
 				token: loginRes.data.token,
 				user: loginRes.data.user,
