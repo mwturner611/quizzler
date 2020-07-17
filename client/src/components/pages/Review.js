@@ -58,7 +58,7 @@ export default function Review(props){
             <h1>Review {deckName}</h1>
             <div className='container mt-4'>
                 <div className='row'>
-                    <div className='col-3 d-flex justify-content-center align-items-center'>
+                    <div className='col-3 d-flex justify-content-center align-items-start'>
                         {previousDisabled === true ? (
                             <Button onClick={() => previousItem()} disabled>Previous Card</Button>
                         ) : (
@@ -66,12 +66,6 @@ export default function Review(props){
                         )}
                     </div>
                     <div className='col-6'>
-                        {/* {cards.map(card => (
-                            <CardTester 
-                            keyword={card.keyWord}
-                            definition={card.definition}
-                            />
-                        ))} */}
                         {currentCard ? (
                             <CardTester 
                             keyword={currentCard.keyWord}
@@ -80,9 +74,8 @@ export default function Review(props){
                         ) : (
                             <h4>Great job, you have finished your review!</h4>
                         )}
-                        
                     </div>
-                    <div className='col-3 d-flex justify-content-center align-items-center'>
+                    <div className='col-3 d-flex justify-content-center align-items-start'>
                         {nextDisabled === true ? (
                             <Button onClick={() => nextItem()} disabled>Next Card</Button>
                         ) : (
