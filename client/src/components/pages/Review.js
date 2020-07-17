@@ -56,9 +56,9 @@ export default function Review(props){
     return(
         <div>
             <h1>Review {deckName}</h1>
-            <div className='conatainer'>
+            <div className='container mt-4'>
                 <div className='row'>
-                    <div className='col-3'>
+                    <div className='col-3 d-flex justify-content-center align-items-center'>
                         {previousDisabled === true ? (
                             <Button onClick={() => previousItem()} disabled>Previous Card</Button>
                         ) : (
@@ -82,7 +82,7 @@ export default function Review(props){
                         )}
                         
                     </div>
-                    <div className='col-3'>
+                    <div className='col-3 d-flex justify-content-center align-items-center'>
                         {nextDisabled === true ? (
                             <Button onClick={() => nextItem()} disabled>Next Card</Button>
                         ) : (

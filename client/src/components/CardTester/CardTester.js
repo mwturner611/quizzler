@@ -16,7 +16,7 @@ function CardTester(props) {
 
         <div className='mt-3'>
             <ReactCardFlip isFlipped={isFlipped} flipDirection="vertical" infinite>
-                <div className="card w-75 text-center">
+                <div className="card w-100 text-center">
                     <div className="card-body">
                         <h5 className="card-title">Keyword</h5>
                         <p className="card-text">{props.keyword}</p>
@@ -24,7 +24,7 @@ function CardTester(props) {
                     </div>
                 </div>
         
-                <div className="card w-75 text-center">
+                <div className="card w-100 text-center">
                     <div className="card-body">
                         <h5 className='card-title'>Definition</h5>
                         <p className="card-text">{props.definition}</p>
