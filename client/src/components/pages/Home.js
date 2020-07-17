@@ -92,8 +92,7 @@ export default function Home() {
 				<ListGroup>
 					{userDecks.map (deck => (
 					  <ListGroupItem>	  
-					   Name: {deck.name}   
-					   Descr: {deck.descr}
+					   Name: {deck.name}  Descr: {deck.descr}
 					   <Button onClick={() => cards(deck)}>Edit Cards</Button>
 					   <Button onClick={() => review(deck)}>Review Deck</Button>
 					   <Button onClick={() => removeDeck(deck._id)}>Delete Deck</Button>
