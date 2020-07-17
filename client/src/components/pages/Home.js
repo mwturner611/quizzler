@@ -21,7 +21,14 @@ export default function Home() {
 	const history = useHistory();
 	const [newTitle, setNewTitle] = useState([]);
 	const [newDescr, setNewDescr] = useState([]);
+<<<<<<< HEAD
 	const newDeck = { name: newTitle, descr: newDescr };
+=======
+	const newDeck = {name: newTitle,descr:newDescr};
+	const [check, setCheck] = useState(false);
+	
+
+>>>>>>> cf8d210825f23b1272daa646412ea9825a6eb927
 
 	// save a new deck
 	function saveDeck(deck) {
@@ -48,9 +55,19 @@ export default function Home() {
 	// find decks
 	function findDecks() {
 		API.getDeck()
+<<<<<<< HEAD
 			.then((res) => setDecks(res.data))
 			.catch((err) => console.log(err));
 	}
+=======
+		.then(res => 
+			setDecks(res.data)
+			)
+			.catch(err => {console.log(err)
+				setCheck(!check)
+			});
+	};
+>>>>>>> cf8d210825f23b1272daa646412ea9825a6eb927
 	// update a deck function
 
 	// delete a deck function
@@ -76,13 +93,18 @@ export default function Home() {
 	};
 
 	// bring up the user's decks on entering page
-	useEffect(() => {
-		setAuthToken(userData.token);
-	}, []);
+	// useEffect(() => {
+	// 	setAuthToken(userData.token);
+	// }, []);
 
 	useEffect(() => {
+<<<<<<< HEAD
 		findDecks();
 	}, []);
+=======
+	 	findDecks();
+	},[check]);
+>>>>>>> cf8d210825f23b1272daa646412ea9825a6eb927
 
 	return (
 		<div className='page'>

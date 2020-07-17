@@ -10,6 +10,7 @@ import Cards from './components/pages/Cards';
 import Review from './components/pages/Review';
 import Header from './components/Header';
 import UserContext from './contexts/UserContext';
+import setAuthToken from './utils/setAuthToken';
 
 function App() {
 	const [userData, setUserData] = useState({
@@ -33,6 +34,7 @@ function App() {
 				const userRes = await Axios.get('http://localhost:3001/api/users', {
 					headers: { 'x-auth-token': token },
 				});
+				setAuthToken(token);
 				setUserData({
 					token,
 					user: userRes.data,
@@ -42,6 +44,10 @@ function App() {
 
 		isLoggedIn();
 	}, []);
+
+	
+		
+	
 
 	return (
 		<div>

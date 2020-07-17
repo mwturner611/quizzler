@@ -10,13 +10,16 @@ export default function Card(props) {
     const [newKeyWord, setNewKeyWord] = useState([]);
 	const [newDefinition, setNewDefinition] = useState([]);
     const newCard = {keyWord: newKeyWord,definition:newDefinition};
+    const [check, setCheck] = useState(false);
 
     function findCards(deckID){
         API.getCard(deckID)
           .then(res =>
              setCards(res.data)
             )
-            .catch(err => console.log(err));
+            .catch(err => {console.log(err)
+                setCheck(!check)
+            });
     };
 
     	// delete a deck function
@@ -49,25 +52,16 @@ export default function Card(props) {
 
     useEffect(() => {
         findCards(deckID)
-    }, []);
+    }, [check]);
 
     return(
         <div>
             <h1>{deckName}: Cards</h1>
             <ListGroup>
                 {cards.map (card => (
-                <ListGroupItem>    
-                <Form inline>
-                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                         <Label for="Keyword" className="mr-sm-2">Keyword</Label>
-                         <Input type="text" name="keyword" id="keyword" placeholder={card.keyWord} />
-                    </FormGroup>
-                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                         <Label for="examplePassword" className="mr-sm-2">Definition</Label>
-                        <Input type="text" name="definition" id="definition" placeholder={card.definition} />
-                    </FormGroup>
-                    <Button onClick={() => removeCard(card._id)}>Delete</Button>
-                    </Form>
+                    <ListGroupItem>
+                        Keyword:  {card.keyWord}    Definition:   {card.definition}
+                        <Button onClick={() => removeCard(card._id)}>Delete</Button>
                     </ListGroupItem>
     ))}
     <ListGroupItem>    
