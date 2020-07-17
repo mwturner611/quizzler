@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import './CardTester.css';
 
-
 function CardTester(props) {
 
     const [isFlipped, setIsFlipped] = useState(false);
@@ -33,7 +32,7 @@ function CardTester(props) {
                 </div>
             </ReactCardFlip>
         </div>
-
+		
     )
 }
 
