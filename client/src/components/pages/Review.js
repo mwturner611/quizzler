@@ -3,6 +3,7 @@ import UserContext from '../../contexts/UserContext';
 import API from '../../utils/Api';
 import {ListGroup, ListGroupItem,  Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import CardTester from '../CardTester/CardTester';
+import { Link } from 'react-router-dom';
 
 export default function Review(props){
     const [cards, setCards] = useState([]);
@@ -58,30 +59,45 @@ export default function Review(props){
             <h1>Review {deckName}</h1>
             <div className='container mt-4'>
                 <div className='row'>
-                    <div className='col-3 d-flex justify-content-center align-items-start'>
+                    {currentCard ? (
+                        <div className='col-md-3 col-sm-12 d-flex justify-content-center align-items-start'>
                         {previousDisabled === true ? (
                             <Button onClick={() => previousItem()} disabled>Previous Card</Button>
                         ) : (
                             <Button onClick={() => previousItem()}>Previous Card</Button>
                         )}
                     </div>
-                    <div className='col-6'>
-                        {currentCard ? (
+                    ) : (
+                        <div></div>
+                    )}
+                    {currentCard ? (
+                    <div className='col-md-6 col-sm-12'>
+                        
                             <CardTester 
                             keyword={currentCard.keyWord}
                             definition={currentCard.definition}
                             />
-                        ) : (
-                            <h4>Great job, you have finished your review!</h4>
-                        )}
                     </div>
-                    <div className='col-3 d-flex justify-content-center align-items-start'>
+                        ) : (
+                            <div className='col-12 text-center'>
+                                <h4>Great job, you have finished your review!</h4>
+                                <Link to='/'>
+                                <Button>Back to my Decks</Button>
+                                </Link>
+                            </div>
+                        )}
+                    
+                    {currentCard ? (
+                        <div className='col-md-3 col-sm-12 d-flex justify-content-center align-items-start'>
                         {nextDisabled === true ? (
                             <Button onClick={() => nextItem()} disabled>Next Card</Button>
                         ) : (
                             <Button onClick={() => nextItem()}>Next Card</Button>
                         )}
                     </div>
+                    ) : (
+                        <div></div>
+                    )}
                 </div>
             </div>
         </div>
