@@ -60,13 +60,12 @@ export default function Card(props) {
                 <Form inline>
                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                          <Label for="Keyword" className="mr-sm-2">Keyword</Label>
-                         <Input type="email" name="email" id="keyword" placeholder={card.keyWord} />
+                         <Input type="text" name="keyword" id="keyword" placeholder={card.keyWord} />
                     </FormGroup>
                      <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
                          <Label for="examplePassword" className="mr-sm-2">Definition</Label>
-                        <Input type="email" name="definition" id="definition" placeholder={card.definition} />
+                        <Input type="text" name="definition" id="definition" placeholder={card.definition} />
                     </FormGroup>
-                    <Button>Update</Button>
                     <Button onClick={() => removeCard(card._id)}>Delete</Button>
                     </Form>
                     </ListGroupItem>
