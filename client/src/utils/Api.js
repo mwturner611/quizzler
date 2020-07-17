@@ -35,6 +35,24 @@ export default {
     // delete a card
     deleteCard: function(cardID){
         return axios.delete('/api/card/'+cardID);
-    }
+    },
+    // post user login
+    postUser: function(loginUser){
+        return axios.post(
+			'http://localhost:3001/api/users/login',
+			loginUser
+		);
+    },
+    // post user register
+    postUserRegister: function(newUser){
+        return axios.post('http://localhost:3001/api/users/register', newUser);
+    },
+    // post new user login
+    postNewUser: function(email,password){
+        return axios.post('http://localhost:3001/api/users/login', {
+            email,
+            password,
+        });
+    } 
     
 }

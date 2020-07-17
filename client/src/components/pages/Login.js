@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import UserContext from '../../contexts/UserContext';
-import Axios from 'axios';
 import { Button } from 'reactstrap';
 import setAuthToken from '../../utils/setAuthToken';
+import API from '../../utils/Api';
 
 const Login = () => {
 	const [email, setEmail] = useState();
@@ -15,10 +15,7 @@ const Login = () => {
 		console.log('clicked');
 		e.preventDefault();
 		const loginUser = { email, password };
-		const loginRes = await Axios.post(
-			'http://localhost:3001/api/users/login',
-			loginUser
-		);
+		const loginRes = await API.postUser(loginUser);
 		setUserData({
 			token: loginRes.data.token,
 			user: loginRes.data.user,
