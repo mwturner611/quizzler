@@ -14,6 +14,7 @@ export default function Home() {
 	const [newTitle, setNewTitle] = useState([]);
 	const [newDescr, setNewDescr] = useState([]);
 	const newDeck = {name: newTitle,descr:newDescr};
+	const [check, setCheck] = useState(false);
 	
 
 
@@ -45,7 +46,9 @@ export default function Home() {
 		.then(res => 
 			setDecks(res.data)
 			)
-			.catch(err => console.log(err));
+			.catch(err => {console.log(err)
+				setCheck(!check)
+			});
 	};
 	// update a deck function
 
@@ -74,13 +77,13 @@ export default function Home() {
 	};
 
 	// bring up the user's decks on entering page
-	useEffect(() => {
-		setAuthToken(userData.token);
-	}, []);
+	// useEffect(() => {
+	// 	setAuthToken(userData.token);
+	// }, []);
 
 	useEffect(() => {
-	 	findDecks()
-	}, []);
+	 	findDecks();
+	},[check]);
 
 
 	return (
