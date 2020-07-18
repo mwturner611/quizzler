@@ -131,9 +131,9 @@ const Home = () => {
 								<CSSTransition key={deck.id} timeout={500} classNames='fade'>
 									<ListGroupItem>
 										Name: {deck.name} Descr: {deck.descr}
-										<Button className="float-right" onClick={() => cards(deck)}>Edit Cards</Button>
-										<Button className="float-right" onClick={() => review(deck)}>Review Deck</Button>
-										<Button className="float-right" onClick={() => removeDeck(deck._id)}>Delete Deck</Button>
+										<Button  onClick={() => cards(deck)}>Edit Cards</Button>
+										<Button  onClick={() => review(deck)}>Review Deck</Button>
+										<Button  onClick={() => removeDeck(deck._id)}>Delete Deck</Button>
 									</ListGroupItem>
 								</CSSTransition>
 							))}

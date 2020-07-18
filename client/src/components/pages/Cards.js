@@ -83,10 +83,10 @@ const Card = (props) => {
 
 	return (
 		<div>
-			<h1>{deckName}: Cards</h1>
+			<h1>{deckName}: Cards <Button onClick={() => review(deckID,deckName)} className='text-center'>Review Now!</Button></h1>
 			<ListGroup>
 				<TransitionGroup className='deck-list'>
-					<ListGroupItem>
+				<ListGroupItem>
 						<Form inline>
 							<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
 								<Label for='Keyword' className='mr-sm-2'>
@@ -115,16 +115,19 @@ const Card = (props) => {
 							<Button onClick={() => addCard(deckID, newCard)}>Add New Card</Button>
 						</Form>
 					</ListGroupItem>
-                    {cards.map((card) => (
+                {cards.map((card) => (
 						<CSSTransition key={card.id} timeout={500} classNames='fade'>
 							<ListGroupItem>
 								Keyword: {card.keyWord} Definition: {card.definition}
-								<Button className="float-right" onClick={() => removeCard(card._id)}>Delete</Button>
+								<Button onClick={() => removeCard(card._id)}>Delete</Button>
 							</ListGroupItem>
 						</CSSTransition>
 					))}
 				</TransitionGroup>
+					
 			</ListGroup>
 		</div>
 	);
 }
+
+export default Card;
