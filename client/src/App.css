@@ -4,6 +4,14 @@ body{
 	font-family: 'Montserrat', sans-serif;
 }
 
+.q-img{
+	width: 75px;
+	height: 75px;
+	margin-right: -13px;
+	margin-left: -10px;
+	margin-top: -3px;
+}
+
 * {
 	box-sizing: border-box;
 }
