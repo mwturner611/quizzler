@@ -4,6 +4,7 @@ import API from '../../utils/Api';
 import {ListGroup, ListGroupItem,  Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import CardFlips from '../CardFlips/CardFlips';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 export default function Review(props){
     const [cards, setCards] = useState([]);
@@ -15,6 +16,7 @@ export default function Review(props){
     const [count, setCount] = useState(0);
     const [check, setCheck] = useState(false);
     const [isFlipped, setIsFlipped] = useState(false);
+    const history = useHistory();
 
     const handleFlip = (e) => {
         e.preventDefault();
@@ -56,7 +58,15 @@ export default function Review(props){
             setNextDisabled(true);
             setPreviousDisabled(true);
         }
-    }
+    };
+
+    	// go to a deck's card page
+	const cardsPage = (deckID,deckName) => {
+		history.push({
+			pathname: '/cards',
+			state: { deckID: deckID, name: deckName },
+		});
+	};
     
     useEffect(() => {
         findCards(deckID)
@@ -64,7 +74,7 @@ export default function Review(props){
 
     return(
         <div>
-            <h1 className='text-center mt-5'>Review - {deckName}</h1>
+            <h1 className='text-center mt-5'>Review - {deckName} <Button onClick={() => cardsPage(deckID,deckName)}>Edit Cards</Button></h1>
             <div className='container mt-5'>
                 <div className='row'>
                     {currentCard ? (
