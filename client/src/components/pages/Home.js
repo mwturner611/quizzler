@@ -12,6 +12,8 @@ import {
 } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useHistory } from 'react-router-dom';
+import Q from '../../images/q-letter.png';
+import ReactCardFlip from 'react-card-flip';
 
 const Home = () => {
 	const { userData } = useContext(UserContext);
@@ -142,8 +144,20 @@ const Home = () => {
 					</ListGroup>
 				</div>
 			) : (
-				<div>
-					<h2>You are not logged in</h2>
+				<div className='container text-center mt-4'>
+					<h2>Welcome to</h2>
+					<div className='row mt-4 d-flex justify-content-center'>
+						<div className='col-md-6 col-sm-12'>
+							<ReactCardFlip>
+								<div className="card w-100 text-center">
+									<div className="card-body">
+										<h1 className='mt-4'><img className='q-img' src={Q} alt='q letter'/>uizzler</h1>
+									</div>
+								</div>
+								<div></div>
+							</ReactCardFlip>
+						</div>
+					</div>
 				</div>
 			)}
 		</div>
