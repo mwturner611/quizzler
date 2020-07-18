@@ -20,9 +20,9 @@ const Home = () => {
 	const history = useHistory();
 	const [newTitle, setNewTitle] = useState('');
 	const [newDescr, setNewDescr] = useState('');
-	const newDeck = {name: newTitle,descr:newDescr};
+	const newDeck = { name: newTitle, descr: newDescr };
 	const [check, setCheck] = useState(false);
-	
+
 	// save a new deck
 	const saveDeck = (deck) => {
 		API.createDeck({
@@ -62,7 +62,7 @@ const Home = () => {
 				console.log(err);
 				setCheck(!check);
 			});
-	};
+	}
 
 	// delete a deck function
 	const removeDeck = (deckID) => {
@@ -91,37 +91,55 @@ const Home = () => {
 	}, [check]);
 
 	return (
-		<div className='page'>
-			{userData.user ? (
-				<div>
-				<h1>Welcome {userData.user.displayName}</h1>
-				<h4>Your Decks</h4>
-				<ListGroup>
-				<ListGroupItem>
-         			<Form inline>
-                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                         <Label for="Keyword" className="mr-sm-2">Name</Label>
-                         <Input value={newTitle} onChange={handleTitleChange} type="text" name="email" id="keyword" placeholder="Title the deck" />
-                    </FormGroup>
-                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                         <Label for="examplePassword" className="mr-sm-2">Description</Label>
-                        <Input value={newDescr} onChange={handleDescrChange} type="text" name="definition" id="definition" placeholder="Describe the deck" />
-                    </FormGroup>
-                    <Button className="float-right" onClick={() => saveDeck(newDeck)}>Add New Deck</Button>
-                    </Form>
-                    </ListGroupItem>
-				
-					{userDecks.map (deck => (
-					  <ListGroupItem>	  
-					   Name: {deck.name}  Descr: {deck.descr}
-					   <Button className="float-right" onClick={() => cards(deck)}>Edit Cards</Button>
-					   <Button className="float-right" onClick={() => review(deck)}>Review Deck</Button>
-					   <Button className="float-right" onClick={() => removeDeck(deck._id)}>Delete Deck</Button>
-
-					   </ListGroupItem>
-					  
-					))}
-				</ListGroup>
+		    <div className='page'>
+				{userData.user ? (
+					<div>
+					<h1>Welcome {userData.user.displayName}</h1>
+					<h4>Your Decks</h4>
+					<ListGroup>
+						<TransitionGroup className='deck-list'>
+						<ListGroupItem>
+								<Form inline>
+									<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+										<Label for='Keyword' className='mr-sm-2'>
+											Name
+										</Label>
+										<Input
+											onChange={handleTitleChange}
+											type='text'
+											name='email'
+											id='keyword'
+											placeholder='Title the deck'
+										/>
+									</FormGroup>
+									<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+										<Label for='examplePassword' className='mr-sm-2'>
+											Description
+										</Label>
+										<Input
+											onChange={handleDescrChange}
+											type='text'
+											name='definition'
+											id='definition'
+											placeholder='Describe the deck'
+										/>
+									</FormGroup>
+									<Button onClick={() => saveDeck(newDeck)}>Add New Deck</Button>
+								</Form>
+							</ListGroupItem>
+							{userDecks.map((deck) => (
+								<CSSTransition key={deck.id} timeout={500} classNames='fade'>
+									<ListGroupItem>
+										Name: {deck.name} Descr: {deck.descr}
+										<Button className="float-right" onClick={() => cards(deck)}>Edit Cards</Button>
+										<Button className="float-right" onClick={() => review(deck)}>Review Deck</Button>
+										<Button className="float-right" onClick={() => removeDeck(deck._id)}>Delete Deck</Button>
+									</ListGroupItem>
+								</CSSTransition>
+							))}
+							
+						</TransitionGroup>
+					</ListGroup>
 				</div>
 			) : (
 				<div>

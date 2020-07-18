@@ -1,8 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import UserContext from '../../contexts/UserContext';
 import API from '../../utils/Api';
-import {ListGroup, ListGroupItem,  Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import {
+    ListGroup,
+    ListGroupItem,  
+    Button, 
+    Form, 
+    FormGroup, 
+    Label, 
+    Input
+} from 'reactstrap';
 import { useHistory } from 'react-router-dom';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
+
 
 const Card = (props) => {
     const [cards, setCards] = useState([]);
@@ -10,18 +20,18 @@ const Card = (props) => {
     const deckName = props.location.state.name;
     const [newKeyWord, setNewKeyWord] = useState([]);
 	const [newDefinition, setNewDefinition] = useState([]);
-    const newCard = {keyWord: newKeyWord,definition:newDefinition};
+    const newCard = { keyWord: newKeyWord, definition: newDefinition };
     const [check, setCheck] = useState(false);
     const history = useHistory();
 
     const findCards = (deckID) => {
         API.getCard(deckID)
-          .then(res =>{
+          .then((res) =>{
              setCards(res.data)
             resetForm()}
             )
-            .catch(err => {console.log(err)
-                setCheck(!check)
+            .catch((err) => {console.log(err);
+                setCheck(!check);
             });
     };
 
@@ -35,22 +45,22 @@ const Card = (props) => {
 	const removeCard = (cardID) =>{
 		API.deleteCard(cardID)
 		.then(() => findCards(deckID))
-		.catch(err => console.log(err));
+		.catch((err) => console.log(err));
     };
     
-    const addCard = (deckID,cardData) =>{
-		API.createCard(deckID,{
-			keyWord:cardData.keyWord,
-			definition: cardData.definition
+    const addCard = (deckID, cardData) =>{
+		API.createCard(deckID, {
+			keyWord: cardData.keyWord,
+			definition: cardData.definition,
 		})
-		.then(() => findCards(deckID))
-		.catch(err => console.log(err));
-    };
+			.then(() => findCards(deckID))
+			.catch((err) => console.log(err));
+	}
 
     const handleKeyWordChange = (event) =>{
 		const entered = event.target.value;
-		setNewKeyWord(entered)
-	};
+		setNewKeyWord(entered);
+	}
 
 	const handleDefinitionChange = (event) =>{
 		const entered = event.target.value;
@@ -63,41 +73,58 @@ const Card = (props) => {
 			pathname: '/review',
 			state: { deckID: deckID, name: deckName },
 		});
-	};
-
-    useEffect(() => {
-        findCards(deckID)
-    }, [check]);
-
-    return(
-        <div>
-            <h1>{deckName}: Cards<Button onClick={() => review(deckID,deckName)}>Review Now</Button></h1>
-            <ListGroup>
-            <ListGroupItem>    
-                <Form inline>
-                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                         <Label for="Keyword" className="mr-sm-2">Keyword</Label>
-                         <Input value={newKeyWord} onChange={handleKeyWordChange} type="input" name="input" id="keyword" placeholder="New KeyWord" />
-                    </FormGroup>
-                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                         <Label for="examplePassword" className="mr-sm-2">Definition</Label>
-                        <Input value={newDefinition} onChange={handleDefinitionChange} type="input" name="definition" id="definition" placeholder="New Definition" />
-                    </FormGroup>
-                    <Button onClick={() => addCard(deckID,newCard)}>Add New Card</Button>
-                    </Form>
-                    </ListGroupItem>
-            
-                {cards.map (card => (
-                    <ListGroupItem>
-                        Keyword:  {card.keyWord}    Definition:   {card.definition}
-                        <Button className="float-right" onClick={() => removeCard(card._id)}>Delete</Button>
-                    </ListGroupItem>
-    ))}
-    </ListGroup>
-        </div>
-  );
-            
+    };
     
+// call find cards until it works
+	useEffect(() => {
+		findCards(deckID);
+	}, [check]);
 
-};
-export default Card;
+
+	return (
+		<div>
+			<h1>{deckName}: Cards</h1>
+			<ListGroup>
+				<TransitionGroup className='deck-list'>
+					<ListGroupItem>
+						<Form inline>
+							<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+								<Label for='Keyword' className='mr-sm-2'>
+									Keyword
+								</Label>
+								<Input
+									onChange={handleKeyWordChange}
+									type='input'
+									name='input'
+									id='keyword'
+									placeholder='New KeyWord'
+								/>
+							</FormGroup>
+							<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+								<Label for='examplePassword' className='mr-sm-2'>
+									Definition
+								</Label>
+								<Input
+									onChange={handleDefinitionChange}
+									type='input'
+									name='definition'
+									id='definition'
+									placeholder='New Definition'
+								/>
+							</FormGroup>
+							<Button onClick={() => addCard(deckID, newCard)}>Add New Card</Button>
+						</Form>
+					</ListGroupItem>
+                    {cards.map((card) => (
+						<CSSTransition key={card.id} timeout={500} classNames='fade'>
+							<ListGroupItem>
+								Keyword: {card.keyWord} Definition: {card.definition}
+								<Button className="float-right" onClick={() => removeCard(card._id)}>Delete</Button>
+							</ListGroupItem>
+						</CSSTransition>
+					))}
+				</TransitionGroup>
+			</ListGroup>
+		</div>
+	);
+}
