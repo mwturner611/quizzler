@@ -21,7 +21,7 @@ export default function Review(props){
         setIsFlipped(!isFlipped);
     };
 
-    function findCards(deckID){
+    const findCards = (deckID) => {
         API.getCard(deckID)
             .then(res => {
                 setCards(res.data);
@@ -33,19 +33,19 @@ export default function Review(props){
             });
     };
 
-    function nextItem(){
+    const nextItem = () => {
         setIsFlipped(false);
         setCount(count+1);
         setCardOnPage(count+1);
     }
 
-    function previousItem(){
+    const previousItem = () => {
         setIsFlipped(false);
         setCount(count-1);
         setCardOnPage(count-1);
     }
 
-    function setCardOnPage(num){
+    const setCardOnPage = (num) => {
         if (num < 1){
             setPreviousDisabled(true);
             setCurrentCard(cards[num]);
