@@ -20,6 +20,7 @@ const AuthButtons = () => {
 			user: undefined,
 		});
 		localStorage.setItem('auth-token', '');
+		history.push('/login');
 	};
 	return (
 		<nav className='auth-buttons'>

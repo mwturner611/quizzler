@@ -1,10 +1,12 @@
 import React from 'react';
+import { Alert } from 'reactstrap';
 
 const ErrorNotice = (props) => {
 	return (
-		<div className='error-notice'>
-			<span>{props.message}</span>
-			<button onClick={props.clearError}>x</button>
+		<div>
+			<Alert color='info' onClick={props.clearError}>
+				{props.message}
+			</Alert>
 		</div>
 	);
 };
