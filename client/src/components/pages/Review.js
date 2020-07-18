@@ -15,6 +15,13 @@ export default function Review(props){
     const [count, setCount] = useState(0);
     const [check, setCheck] = useState(false);
 
+    const [isFlipped, setIsFlipped] = useState(false);
+
+    const handleFlip = (e) => {
+        e.preventDefault();
+        setIsFlipped(!isFlipped);
+    };
+
     function findCards(deckID){
         API.getCard(deckID)
             .then(res => {
@@ -56,8 +63,8 @@ export default function Review(props){
 
     return(
         <div>
-            <h1>Review {deckName}</h1>
-            <div className='container mt-4'>
+            <h1 className='text-center mt-5'>Review - {deckName}</h1>
+            <div className='container mt-5'>
                 <div className='row'>
                     {currentCard ? (
                         <div className='col-md-3 col-sm-12 d-flex justify-content-center align-items-start'>
@@ -76,6 +83,8 @@ export default function Review(props){
                             <CardTester 
                             keyword={currentCard.keyWord}
                             definition={currentCard.definition}
+                            isFlipped={isFlipped}
+                            handleFlip={handleFlip}
                             />
                     </div>
                         ) : (
