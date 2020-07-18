@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import UserContext from '../../contexts/UserContext';
 import API from '../../utils/Api';
 import {ListGroup, ListGroupItem,  Button, Form, FormGroup, Label, Input} from 'reactstrap';
-import CardTester from '../CardFlips/CardFlips';
+import CardFlips from '../CardFlips/CardFlips';
 import { Link } from 'react-router-dom';
 
 export default function Review(props){
@@ -81,7 +81,7 @@ export default function Review(props){
                     {currentCard ? (
                     <div className='col-md-6 col-sm-12'>
                         
-                            <CardTester 
+                            <CardFlips 
                             keyword={currentCard.keyWord}
                             definition={currentCard.definition}
                             isFlipped={isFlipped}

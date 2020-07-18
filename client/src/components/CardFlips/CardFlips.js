@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
 import './CardFlips.css';
 
-function CardTester(props) {
+function CardFlips(props) {
 
     
 
@@ -31,4 +31,4 @@ function CardTester(props) {
     )
 }
 
-export default CardTester;
+export default CardFlips;
