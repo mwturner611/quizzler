@@ -13,7 +13,7 @@ import {
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useHistory } from 'react-router-dom';
 
-export default function Home() {
+const Home = () => {
 	const { userData } = useContext(UserContext);
 	const userID = userData.user;
 	const [userDecks, setDecks] = useState([]);
@@ -24,7 +24,7 @@ export default function Home() {
 	const [check, setCheck] = useState(false);
 	
 	// save a new deck
-	function saveDeck(deck) {
+	const saveDeck = (deck) => {
 		API.createDeck({
 			name: deck.name,
 			descr: deck.descr,
@@ -37,25 +37,25 @@ export default function Home() {
 	}
 
 	// reset form function
-	function resetForm() {
+	const resetForm = () => {
 		setNewTitle('');
 		setNewDescr('');
 	}
 
 	// collect what's entered in title field set state
-	function handleTitleChange(event) {
+	const handleTitleChange = (event) => {
 		const entered = event.target.value;
 		setNewTitle(entered);
 	}
 
 	// collect what's entered in descr. field and set state
-	function handleDescrChange(event) {
+	const handleDescrChange = (event) => {
 		const entered = event.target.value;
 		setNewDescr(entered);
 	}
 
 	// find decks
-	function findDecks() {
+	const findDecks = () => {
 		API.getDeck()
 			.then((res) => setDecks(res.data))
 			.catch((err) => {
@@ -65,7 +65,7 @@ export default function Home() {
 	};
 
 	// delete a deck function
-	function removeDeck(deckID) {
+	const removeDeck = (deckID) => {
 		API.deleteDeck(deckID)
 			.then(() => findDecks())
 			.catch((err) => console.log(err));
@@ -131,3 +131,5 @@ export default function Home() {
 		</div>
 	);
 }
+
+export default Home;

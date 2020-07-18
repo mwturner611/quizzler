@@ -4,7 +4,7 @@ import API from '../../utils/Api';
 import {ListGroup, ListGroupItem,  Button, Form, FormGroup, Label, Input} from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 
-export default function Card(props) {
+const Card = (props) => {
     const [cards, setCards] = useState([]);
     const deckID = props.location.state.deckID;
     const deckName = props.location.state.name;
@@ -14,7 +14,7 @@ export default function Card(props) {
     const [check, setCheck] = useState(false);
     const history = useHistory();
 
-    function findCards(deckID){
+    const findCards = (deckID) => {
         API.getCard(deckID)
           .then(res =>{
              setCards(res.data)
@@ -26,19 +26,19 @@ export default function Card(props) {
     };
 
     // reset from function
-    function resetForm(){
+    const resetForm = () =>{
         setNewKeyWord('');
         setNewDefinition('');
     }
 
     	// delete a deck function
-	function removeCard(cardID){
+	const removeCard = (cardID) =>{
 		API.deleteCard(cardID)
 		.then(() => findCards(deckID))
 		.catch(err => console.log(err));
     };
     
-    function addCard(deckID,cardData){
+    const addCard = (deckID,cardData) =>{
 		API.createCard(deckID,{
 			keyWord:cardData.keyWord,
 			definition: cardData.definition
@@ -47,12 +47,12 @@ export default function Card(props) {
 		.catch(err => console.log(err));
     };
 
-    function handleKeyWordChange(event){
+    const handleKeyWordChange = (event) =>{
 		const entered = event.target.value;
 		setNewKeyWord(entered)
 	};
 
-	function handleDefinitionChange(event){
+	const handleDefinitionChange = (event) =>{
 		const entered = event.target.value;
 		setNewDefinition(entered)
 	};
@@ -100,3 +100,4 @@ export default function Card(props) {
     
 
 };
+export default Card;

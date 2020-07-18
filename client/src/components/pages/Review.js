@@ -6,7 +6,7 @@ import CardFlips from '../CardFlips/CardFlips';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
-export default function Review(props){
+const Review = (props) => {
     const [cards, setCards] = useState([]);
     const [currentCard, setCurrentCard] = useState({});
     const deckID = props.location.state.deckID;
@@ -66,6 +66,13 @@ export default function Review(props){
 			pathname: '/cards',
 			state: { deckID: deckID, name: deckName },
 		});
+    };
+    // go to review page
+	const review = (deckID,deckName) => {
+		history.push({
+			pathname: '/review',
+			state: { deckID: deckID, name: deckName },
+		});
 	};
     
     useEffect(() => {
@@ -74,7 +81,8 @@ export default function Review(props){
 
     return(
         <div>
-            <h1 className='text-center mt-5'>Review - {deckName} <Button onClick={() => cardsPage(deckID,deckName)}>Edit Cards</Button></h1>
+            <h1 className='text-center mt-5'>Review - {deckName}  <Button onClick={() => cardsPage(deckID,deckName)} className='text-center'>Edit Cards</Button></h1>
+            
             <div className='container mt-5'>
                 <div className='row'>
                     {currentCard ? (
@@ -104,6 +112,7 @@ export default function Review(props){
                                 <Link to='/'>
                                 <Button>Back to my Decks</Button>
                                 </Link>
+                                <Button onClick={() => window.location.reload(false)}>Review Again!</Button>
                             </div>
                         )}
                     
@@ -126,3 +135,5 @@ export default function Review(props){
 
 
 };
+
+export default Review;
