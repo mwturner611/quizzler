@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import UserContext from '../../contexts/UserContext';
 import API from '../../utils/Api';
 import {ListGroup, ListGroupItem,  Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import { useHistory } from 'react-router-dom';
 
 export default function Card(props) {
     const [cards, setCards] = useState([]);
@@ -11,6 +12,7 @@ export default function Card(props) {
 	const [newDefinition, setNewDefinition] = useState([]);
     const newCard = {keyWord: newKeyWord,definition:newDefinition};
     const [check, setCheck] = useState(false);
+    const history = useHistory();
 
     function findCards(deckID){
         API.getCard(deckID)
@@ -55,7 +57,13 @@ export default function Card(props) {
 		setNewDefinition(entered)
 	};
     
-//    update a card function
+	// go to review page
+	const review = (deckID,deckName) => {
+		history.push({
+			pathname: '/review',
+			state: { deckID: deckID, name: deckName },
+		});
+	};
 
     useEffect(() => {
         findCards(deckID)
@@ -63,8 +71,8 @@ export default function Card(props) {
 
     return(
         <div>
+            <h1>{deckName}: Cards<Button onClick={() => review(deckID,deckName)}>Review Now</Button></h1>
             <ListGroup>
-            <h1>{deckName}: Cards</h1>
             <ListGroupItem>    
                 <Form inline>
                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
