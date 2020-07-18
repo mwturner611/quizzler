@@ -14,13 +14,20 @@ export default function Card(props) {
 
     function findCards(deckID){
         API.getCard(deckID)
-          .then(res =>
+          .then(res =>{
              setCards(res.data)
+            resetForm()}
             )
             .catch(err => {console.log(err)
                 setCheck(!check)
             });
     };
+
+    // reset from function
+    function resetForm(){
+        setNewKeyWord('');
+        setNewDefinition('');
+    }
 
     	// delete a deck function
 	function removeCard(cardID){
@@ -56,27 +63,28 @@ export default function Card(props) {
 
     return(
         <div>
-            <h1>{deckName}: Cards</h1>
             <ListGroup>
+            <h1>{deckName}: Cards</h1>
+            <ListGroupItem>    
+                <Form inline>
+                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                         <Label for="Keyword" className="mr-sm-2">Keyword</Label>
+                         <Input value={newKeyWord} onChange={handleKeyWordChange} type="input" name="input" id="keyword" placeholder="New KeyWord" />
+                    </FormGroup>
+                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                         <Label for="examplePassword" className="mr-sm-2">Definition</Label>
+                        <Input value={newDefinition} onChange={handleDefinitionChange} type="input" name="definition" id="definition" placeholder="New Definition" />
+                    </FormGroup>
+                    <Button onClick={() => addCard(deckID,newCard)}>Add New Card</Button>
+                    </Form>
+                    </ListGroupItem>
+            
                 {cards.map (card => (
                     <ListGroupItem>
                         Keyword:  {card.keyWord}    Definition:   {card.definition}
                         <Button onClick={() => removeCard(card._id)}>Delete</Button>
                     </ListGroupItem>
     ))}
-    <ListGroupItem>    
-                <Form inline>
-                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                         <Label for="Keyword" className="mr-sm-2">Keyword</Label>
-                         <Input onChange={handleKeyWordChange} type="input" name="input" id="keyword" placeholder="New KeyWord" />
-                    </FormGroup>
-                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                         <Label for="examplePassword" className="mr-sm-2">Definition</Label>
-                        <Input onChange={handleDefinitionChange} type="input" name="definition" id="definition" placeholder="New Definition" />
-                    </FormGroup>
-                    <Button onClick={() => addCard(deckID,newCard)}>Add New Card</Button>
-                    </Form>
-                    </ListGroupItem>
     </ListGroup>
         </div>
   );

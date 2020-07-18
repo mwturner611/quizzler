@@ -29,8 +29,17 @@ export default function Home() {
 			name: deck.name,
 			descr: deck.descr,
 		})
-			.then(() => findDecks())
+			.then(() => {
+			findDecks()
+			resetForm()}
+			)
 			.catch((err) => console.log(err));
+	}
+
+	// reset form function
+	function resetForm() {
+		setNewTitle('');
+		setNewDescr('');
 	}
 
 	// collect what's entered in title field set state
@@ -88,6 +97,20 @@ export default function Home() {
 				<h1>Welcome {userData.user.displayName}</h1>
 				<h4>Your Decks</h4>
 				<ListGroup>
+				<ListGroupItem>
+         			<Form inline>
+                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                         <Label for="Keyword" className="mr-sm-2">Name</Label>
+                         <Input value={newTitle} onChange={handleTitleChange} type="text" name="email" id="keyword" placeholder="Title the deck" />
+                    </FormGroup>
+                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
+                         <Label for="examplePassword" className="mr-sm-2">Description</Label>
+                        <Input value={newDescr} onChange={handleDescrChange} type="text" name="definition" id="definition" placeholder="Describe the deck" />
+                    </FormGroup>
+                    <Button onClick={() => saveDeck(newDeck)}>Add New Deck</Button>
+                    </Form>
+                    </ListGroupItem>
+				
 					{userDecks.map (deck => (
 					  <ListGroupItem>	  
 					   Name: {deck.name}  Descr: {deck.descr}
@@ -98,20 +121,6 @@ export default function Home() {
 					   </ListGroupItem>
 					  
 					))}
-					<ListGroupItem>
-         			<Form inline>
-                    <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                         <Label for="Keyword" className="mr-sm-2">Name</Label>
-                         <Input onChange={handleTitleChange} type="text" name="email" id="keyword" placeholder="Title the deck" />
-                    </FormGroup>
-                     <FormGroup className="mb-2 mr-sm-2 mb-sm-0">
-                         <Label for="examplePassword" className="mr-sm-2">Description</Label>
-                        <Input onChange={handleDescrChange} type="text" name="definition" id="definition" placeholder="Describe the deck" />
-                    </FormGroup>
-                    <Button onClick={() => saveDeck(newDeck)}>Add New Deck</Button>
-                    </Form>
-                    </ListGroupItem>
-				
 				</ListGroup>
 				</div>
 			) : (

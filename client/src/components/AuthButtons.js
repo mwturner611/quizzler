@@ -13,6 +13,9 @@ const AuthButtons = () => {
 	const login = () => {
 		history.push('/login');
 	};
+	const home = () => {
+		history.push('/');
+	};
 	// this will return userdata hook back to original state and remove token from local storage
 	const logout = () => {
 		setUserData({
@@ -25,9 +28,14 @@ const AuthButtons = () => {
 	return (
 		<nav className='auth-buttons'>
 			{userData.user ? (
+				<div>
+				<Button color='info' onClick={home}>
+				Home
+			    </Button>
 				<Button color='warning' onClick={logout}>
 					Log Out
 				</Button>
+				</div>
 			) : (
 				<div>
 					<Button color='info' onClick={register}>
