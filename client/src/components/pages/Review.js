@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import UserContext from '../../contexts/UserContext';
 import API from '../../utils/Api';
-import {ListGroup, ListGroupItem,  Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import {Button} from 'reactstrap';
 import CardFlips from '../CardFlips/CardFlips';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
@@ -67,14 +67,7 @@ const Review = (props) => {
 			state: { deckID: deckID, name: deckName },
 		});
     };
-    // go to review page
-	const review = (deckID,deckName) => {
-		history.push({
-			pathname: '/review',
-			state: { deckID: deckID, name: deckName },
-		});
-	};
-    
+     
     useEffect(() => {
         findCards(deckID)
     }, [check]);

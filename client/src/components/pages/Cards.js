@@ -90,7 +90,7 @@ const Card = (props) => {
                 {cards.map (card => (
                     <ListGroupItem>
                         Keyword:  {card.keyWord}    Definition:   {card.definition}
-                        <Button onClick={() => removeCard(card._id)}>Delete</Button>
+                        <Button className="float-right" onClick={() => removeCard(card._id)}>Delete</Button>
                     </ListGroupItem>
     ))}
     </ListGroup>

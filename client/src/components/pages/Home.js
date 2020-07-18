@@ -107,16 +107,16 @@ const Home = () => {
                          <Label for="examplePassword" className="mr-sm-2">Description</Label>
                         <Input value={newDescr} onChange={handleDescrChange} type="text" name="definition" id="definition" placeholder="Describe the deck" />
                     </FormGroup>
-                    <Button onClick={() => saveDeck(newDeck)}>Add New Deck</Button>
+                    <Button className="float-right" onClick={() => saveDeck(newDeck)}>Add New Deck</Button>
                     </Form>
                     </ListGroupItem>
 				
 					{userDecks.map (deck => (
 					  <ListGroupItem>	  
 					   Name: {deck.name}  Descr: {deck.descr}
-					   <Button onClick={() => cards(deck)}>Edit Cards</Button>
-					   <Button onClick={() => review(deck)}>Review Deck</Button>
-					   <Button onClick={() => removeDeck(deck._id)}>Delete Deck</Button>
+					   <Button className="float-right" onClick={() => cards(deck)}>Edit Cards</Button>
+					   <Button className="float-right" onClick={() => review(deck)}>Review Deck</Button>
+					   <Button className="float-right" onClick={() => removeDeck(deck._id)}>Delete Deck</Button>
 
 					   </ListGroupItem>
 					  
