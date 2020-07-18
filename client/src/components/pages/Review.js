@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import UserContext from '../../contexts/UserContext';
 import API from '../../utils/Api';
 import {ListGroup, ListGroupItem,  Button, Form, FormGroup, Label, Input} from 'reactstrap';
-import CardTester from '../CardTester/CardTester';
+import CardTester from '../CardFlips/CardFlips';
 import { Link } from 'react-router-dom';
 
 export default function Review(props){
@@ -14,7 +14,6 @@ export default function Review(props){
     const [previousDisabled, setPreviousDisabled] = useState(true);
     const [count, setCount] = useState(0);
     const [check, setCheck] = useState(false);
-
     const [isFlipped, setIsFlipped] = useState(false);
 
     const handleFlip = (e) => {
@@ -35,11 +34,13 @@ export default function Review(props){
     };
 
     function nextItem(){
+        setIsFlipped(false);
         setCount(count+1);
         setCardOnPage(count+1);
     }
 
     function previousItem(){
+        setIsFlipped(false);
         setCount(count-1);
         setCardOnPage(count-1);
     }

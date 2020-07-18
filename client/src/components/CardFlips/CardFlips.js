@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReactCardFlip from 'react-card-flip';
-import './CardTester.css';
+import './CardFlips.css';
 
 function CardTester(props) {
 
