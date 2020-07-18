@@ -2,42 +2,53 @@ import React, { useContext, useEffect, useState } from 'react';
 import UserContext from '../../contexts/UserContext';
 import API from '../../utils/Api';
 import {
-	ListGroup,
-	ListGroupItem,
-	Button,
-	Form,
-	FormGroup,
-	Label,
-	Input,
+    ListGroup,
+    ListGroupItem,  
+    Button, 
+    Form, 
+    FormGroup, 
+    Label, 
+    Input
 } from 'reactstrap';
+import { useHistory } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-export default function Card(props) {
-	const [cards, setCards] = useState([]);
-	const deckID = props.location.state.deckID;
-	const deckName = props.location.state.name;
-	const [newKeyWord, setNewKeyWord] = useState([]);
+
+const Card = (props) => {
+    const [cards, setCards] = useState([]);
+    const deckID = props.location.state.deckID;
+    const deckName = props.location.state.name;
+    const [newKeyWord, setNewKeyWord] = useState([]);
 	const [newDefinition, setNewDefinition] = useState([]);
-	const newCard = { keyWord: newKeyWord, definition: newDefinition };
-	const [check, setCheck] = useState(false);
+    const newCard = { keyWord: newKeyWord, definition: newDefinition };
+    const [check, setCheck] = useState(false);
+    const history = useHistory();
 
-	function findCards(deckID) {
-		API.getCard(deckID)
-			.then((res) => setCards(res.data))
-			.catch((err) => {
-				console.log(err);
-				setCheck(!check);
-			});
-	}
+    const findCards = (deckID) => {
+        API.getCard(deckID)
+          .then((res) =>{
+             setCards(res.data)
+            resetForm()}
+            )
+            .catch((err) => {console.log(err);
+                setCheck(!check);
+            });
+    };
 
-	// delete a deck function
-	function removeCard(cardID) {
+    // reset from function
+    const resetForm = () =>{
+        setNewKeyWord('');
+        setNewDefinition('');
+    }
+
+    	// delete a deck function
+	const removeCard = (cardID) =>{
 		API.deleteCard(cardID)
-			.then(() => findCards(deckID))
-			.catch((err) => console.log(err));
-	}
-
-	function addCard(deckID, cardData) {
+		.then(() => findCards(deckID))
+		.catch((err) => console.log(err));
+    };
+    
+    const addCard = (deckID, cardData) =>{
 		API.createCard(deckID, {
 			keyWord: cardData.keyWord,
 			definition: cardData.definition,
@@ -46,36 +57,36 @@ export default function Card(props) {
 			.catch((err) => console.log(err));
 	}
 
-	function handleKeyWordChange(event) {
+    const handleKeyWordChange = (event) =>{
 		const entered = event.target.value;
 		setNewKeyWord(entered);
 	}
 
-	function handleDefinitionChange(event) {
+	const handleDefinitionChange = (event) =>{
 		const entered = event.target.value;
-		setNewDefinition(entered);
-	}
-
-	//    update a card function
-
+		setNewDefinition(entered)
+	};
+    
+	// go to review page
+	const review = (deckID,deckName) => {
+		history.push({
+			pathname: '/review',
+			state: { deckID: deckID, name: deckName },
+		});
+    };
+    
+// call find cards until it works
 	useEffect(() => {
 		findCards(deckID);
 	}, [check]);
 
+
 	return (
 		<div>
-			<h1>{deckName}: Cards</h1>
+			<h1>{deckName}: Cards <Button onClick={() => review(deckID,deckName)} className='text-center'>Review Now!</Button></h1>
 			<ListGroup>
 				<TransitionGroup className='deck-list'>
-					{cards.map((card) => (
-						<CSSTransition key={card.id} timeout={500} classNames='fade'>
-							<ListGroupItem>
-								Keyword: {card.keyWord} Definition: {card.definition}
-								<Button onClick={() => removeCard(card._id)}>Delete</Button>
-							</ListGroupItem>
-						</CSSTransition>
-					))}
-					<ListGroupItem>
+				<ListGroupItem>
 						<Form inline>
 							<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
 								<Label for='Keyword' className='mr-sm-2'>
@@ -104,8 +115,19 @@ export default function Card(props) {
 							<Button onClick={() => addCard(deckID, newCard)}>Add New Card</Button>
 						</Form>
 					</ListGroupItem>
+                {cards.map((card) => (
+						<CSSTransition key={card.id} timeout={500} classNames='fade'>
+							<ListGroupItem>
+								Keyword: {card.keyWord} Definition: {card.definition}
+								<Button onClick={() => removeCard(card._id)}>Delete</Button>
+							</ListGroupItem>
+						</CSSTransition>
+					))}
 				</TransitionGroup>
+					
 			</ListGroup>
 		</div>
 	);
 }
+
+export default Card;

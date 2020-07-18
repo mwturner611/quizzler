@@ -13,7 +13,7 @@ import {
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useHistory } from 'react-router-dom';
 
-export default function Home() {
+const Home = () => {
 	const { userData } = useContext(UserContext);
 	const userID = userData.user;
 	const [userDecks, setDecks] = useState([]);
@@ -24,29 +24,38 @@ export default function Home() {
 	const [check, setCheck] = useState(false);
 
 	// save a new deck
-	function saveDeck(deck) {
+	const saveDeck = (deck) => {
 		API.createDeck({
 			name: deck.name,
 			descr: deck.descr,
 		})
-			.then(() => findDecks())
+			.then(() => {
+			findDecks()
+			resetForm()}
+			)
 			.catch((err) => console.log(err));
 	}
 
+	// reset form function
+	const resetForm = () => {
+		setNewTitle('');
+		setNewDescr('');
+	}
+
 	// collect what's entered in title field set state
-	function handleTitleChange(event) {
+	const handleTitleChange = (event) => {
 		const entered = event.target.value;
 		setNewTitle(entered);
 	}
 
 	// collect what's entered in descr. field and set state
-	function handleDescrChange(event) {
+	const handleDescrChange = (event) => {
 		const entered = event.target.value;
 		setNewDescr(entered);
 	}
 
 	// find decks
-	function findDecks() {
+	const findDecks = () => {
 		API.getDeck()
 			.then((res) => setDecks(res.data))
 			.catch((err) => {
@@ -56,7 +65,7 @@ export default function Home() {
 	}
 
 	// delete a deck function
-	function removeDeck(deckID) {
+	const removeDeck = (deckID) => {
 		API.deleteDeck(deckID)
 			.then(() => findDecks())
 			.catch((err) => console.log(err));
@@ -82,24 +91,14 @@ export default function Home() {
 	}, [check]);
 
 	return (
-		<div className='page'>
-			{userData.user ? (
-				<div>
+		    <div className='page'>
+				{userData.user ? (
+					<div>
 					<h1>Welcome {userData.user.displayName}</h1>
 					<h4>Your Decks</h4>
 					<ListGroup>
 						<TransitionGroup className='deck-list'>
-							{userDecks.map((deck) => (
-								<CSSTransition key={deck.id} timeout={500} classNames='fade'>
-									<ListGroupItem>
-										Name: {deck.name} Descr: {deck.descr}
-										<Button onClick={() => cards(deck)}>Edit Cards</Button>
-										<Button onClick={() => review(deck)}>Review Deck</Button>
-										<Button onClick={() => removeDeck(deck._id)}>Delete Deck</Button>
-									</ListGroupItem>
-								</CSSTransition>
-							))}
-							<ListGroupItem>
+						<ListGroupItem>
 								<Form inline>
 									<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
 										<Label for='Keyword' className='mr-sm-2'>
@@ -128,6 +127,17 @@ export default function Home() {
 									<Button onClick={() => saveDeck(newDeck)}>Add New Deck</Button>
 								</Form>
 							</ListGroupItem>
+							{userDecks.map((deck) => (
+								<CSSTransition key={deck.id} timeout={500} classNames='fade'>
+									<ListGroupItem>
+										Name: {deck.name} Descr: {deck.descr}
+										<Button  onClick={() => cards(deck)}>Edit Cards</Button>
+										<Button  onClick={() => review(deck)}>Review Deck</Button>
+										<Button  onClick={() => removeDeck(deck._id)}>Delete Deck</Button>
+									</ListGroupItem>
+								</CSSTransition>
+							))}
+							
 						</TransitionGroup>
 					</ListGroup>
 				</div>
@@ -139,3 +149,5 @@ export default function Home() {
 		</div>
 	);
 }
+
+export default Home;

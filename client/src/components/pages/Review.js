@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import UserContext from '../../contexts/UserContext';
 import API from '../../utils/Api';
-import {ListGroup, ListGroupItem,  Button, Form, FormGroup, Label, Input} from 'reactstrap';
+import {Button} from 'reactstrap';
 import CardFlips from '../CardFlips/CardFlips';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-export default function Review(props){
+const Review = (props) => {
     const [cards, setCards] = useState([]);
     const [currentCard, setCurrentCard] = useState({});
     const deckID = props.location.state.deckID;
@@ -15,6 +16,7 @@ export default function Review(props){
     const [count, setCount] = useState(0);
     const [check, setCheck] = useState(false);
     const [isFlipped, setIsFlipped] = useState(false);
+    const history = useHistory();
 
     const handleFlip = (e) => {
         e.preventDefault();
@@ -56,15 +58,24 @@ export default function Review(props){
             setNextDisabled(true);
             setPreviousDisabled(true);
         }
-    }
-    
+    };
+
+    	// go to a deck's card page
+	const cardsPage = (deckID,deckName) => {
+		history.push({
+			pathname: '/cards',
+			state: { deckID: deckID, name: deckName },
+		});
+    };
+     
     useEffect(() => {
         findCards(deckID)
     }, [check]);
 
     return(
         <div>
-            <h1 className='text-center mt-5'>Review - {deckName}</h1>
+            <h1 className='text-center mt-5'>Review - {deckName}  <Button onClick={() => cardsPage(deckID,deckName)} className='text-center'>Edit Cards</Button></h1>
+            
             <div className='container mt-5'>
                 <div className='row'>
                     {currentCard ? (
@@ -94,6 +105,7 @@ export default function Review(props){
                                 <Link to='/'>
                                 <Button>Back to my Decks</Button>
                                 </Link>
+                                <Button onClick={() => window.location.reload(false)}>Review Again!</Button>
                             </div>
                         )}
                     
@@ -116,3 +128,5 @@ export default function Review(props){
 
 
 };
+
+export default Review;
