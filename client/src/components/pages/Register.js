@@ -35,37 +35,53 @@ const Register = () => {
 	};
 
 	return (
-		<div className='page'>
+		<div className='page text-center'>
 			<h2>Sign up here</h2>
 			{error && (
 				<ErrorNotice message={error} clearError={() => setError(undefined)} />
 			)}
-			<form className='form' onSubmit={handleSubmit}>
-				<label htmlFor='register-email'>Email</label>
-				<input
-					id='register-email'
-					type='email'
-					onChange={(e) => setEmail(e.target.value)}
-				/>
-				<label htmlFor='register-password'>Password</label>
-				<input
-					id='register-password'
-					type='password'
-					onChange={(e) => setPassword(e.target.value)}
-				/>
-				<input
-					placeholder='verify password'
-					type='password'
-					onChange={(e) => setPasswordcheck(e.target.value)}
-				/>
-				<label htmlFor='register-displayname'>Username</label>
-				<input
-					id='register-displayname'
-					type='text'
-					onChange={(e) => setDisplayName(e.target.value)}
-				/>
-				<input type='submit' value='register' />
-			</form>
+			<div className='container'>
+				<div className='row d-flex justify-content-center'>
+					<div className='col-md-8 col-sm-12 '>
+						<form onSubmit={handleSubmit}>
+							<div class="form-group">
+								<label className='mt-1' htmlFor='register-email'>Email</label>
+								<input
+									className='form-control mx-sm-3'
+									id='register-email'
+									type='email'
+									onChange={(e) => setEmail(e.target.value)}
+								/>
+								<label className='mt-2 mb-n1' htmlFor='register-password'>Password</label><br></br>
+								<small class="text-muted">
+								Must be at least 5 characters long.
+								</small>
+								<input
+									className='form-control mx-sm-3 mb-3'
+									id='register-password'
+									type='password'
+									onChange={(e) => setPassword(e.target.value)}
+								/>
+								
+								<input
+									className='form-control mx-sm-3'
+									placeholder='verify password'
+									type='password'
+									onChange={(e) => setPasswordcheck(e.target.value)}
+								/>
+								<label className='mt-2' htmlFor='register-displayname'>Username</label>
+								<input
+									className='form-control mx-sm-3'
+									id='register-displayname'
+									type='text'
+									onChange={(e) => setDisplayName(e.target.value)}
+								/>
+								<button className='btn-register' type='submit' value='register'>Register</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };
