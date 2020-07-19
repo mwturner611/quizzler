@@ -4,12 +4,13 @@ body{
 	font-family: 'Montserrat', sans-serif;
 }
 
-.q-img{
+.card-img{
 	width: 75px;
 	height: 75px;
-	margin-right: -13px;
-	margin-left: -10px;
-	margin-top: -3px;
+}
+
+.links{
+	color: skyblue;
 }
 
 * {

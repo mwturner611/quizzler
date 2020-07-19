@@ -11,9 +11,9 @@ import {
 	Input,
 } from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { useHistory } from 'react-router-dom';
-import Q from '../../images/q-letter.png';
+import { useHistory, Link } from 'react-router-dom';
 import ReactCardFlip from 'react-card-flip';
+import cardImg from '../../images/flash-card.png';
 
 const Home = () => {
 	const { userData } = useContext(UserContext);
@@ -145,18 +145,22 @@ const Home = () => {
 				</div>
 			) : (
 				<div className='container text-center mt-4'>
+					<img className='card-img mb-4' src={cardImg} alt='flash card icon'/>
 					<h2>Welcome to</h2>
 					<div className='row mt-4 d-flex justify-content-center'>
 						<div className='col-md-6 col-sm-12'>
 							<ReactCardFlip>
 								<div className="card w-100 text-center">
 									<div className="card-body">
-										<h1 className='mt-4'><img className='q-img' src={Q} alt='q letter'/>uizzler</h1>
+										<h1 className='mt-5 mb-5'>Quizzler</h1>
 									</div>
 								</div>
 								<div></div>
 							</ReactCardFlip>
 						</div>
+					</div>
+					<div className='row mt-3 d-flex justify-content-center'>
+						<p><Link className='links' to='/login'>Login</Link> or <Link className='links' to='/register'>Make An Account</Link></p>
 					</div>
 				</div>
 			)}
