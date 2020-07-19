@@ -93,18 +93,18 @@ const Home = () => {
 	}, [check]);
 
 	return (
-		    <div className='page'>
+		    <div className='page text-center'>
 				{userData.user ? (
 					<div>
-					<h1>Welcome {userData.user.displayName}</h1>
-					<h4>Your Decks</h4>
+					<h1>Welcome {userData.user.displayName}!</h1>
+					<h4 className='mt-4'>Your Decks</h4>
 					<ListGroup>
 						<TransitionGroup className='deck-list'>
 						<ListGroupItem>
 								<Form inline>
 									<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
 										<Label for='Keyword' className='mr-sm-2'>
-											Name
+											Title
 										</Label>
 										<Input
 											onChange={handleTitleChange}
