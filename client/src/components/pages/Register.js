@@ -4,6 +4,7 @@ import UserContext from '../../contexts/UserContext';
 import ErrorNotice from '../ErrorNotice';
 import setAuthToken from '../../utils/setAuthToken';
 import API from '../../utils/Api';
+import { Link } from 'react-router-dom';
 
 const Register = () => {
 	const [email, setEmail] = useState();
@@ -42,7 +43,7 @@ const Register = () => {
 			)}
 			<div className='container'>
 				<div className='row d-flex justify-content-center'>
-					<div className='col-md-8 col-sm-12 '>
+					<div className='col-md-8 col-sm-12'>
 						<form onSubmit={handleSubmit}>
 							<div class="form-group">
 								<label className='mt-1' htmlFor='register-email'>Email</label>
@@ -79,6 +80,7 @@ const Register = () => {
 								<button className='btn-register' type='submit' value='register'>Register</button>
 							</div>
 						</form>
+						<Link className='links' to='/login'>Back to login</Link>
 					</div>
 				</div>
 			</div>

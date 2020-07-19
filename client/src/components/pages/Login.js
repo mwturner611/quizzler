@@ -2,9 +2,9 @@ import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import ErrorNotice from '../ErrorNotice';
 import UserContext from '../../contexts/UserContext';
-import { Button } from 'reactstrap';
 import setAuthToken from '../../utils/setAuthToken';
 import API from '../../utils/Api';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
 	const [email, setEmail] = useState();
@@ -31,28 +31,40 @@ const Login = () => {
 		}
 	};
 	return (
-		<div className='page'>
-			<h2>Welcome back. Log in</h2>
+		<div className='page text-center'>
+			<h4>Welcome back!</h4>
+			<h2>Login</h2>
 			{error && (
 				<ErrorNotice message={error} clearError={() => setError(undefined)} />
 			)}
-			<form className='form' onSubmit={handleSubmit}>
-				<label htmlFor='login-email'>Email</label>
-				<input
-					id='login-email'
-					type='email'
-					onChange={(e) => setEmail(e.target.value)}
-				/>
-				<label htmlFor='login-password'>Password</label>
-				<input
-					id='login-password'
-					type='password'
-					onChange={(e) => setPassword(e.target.value)}
-				/>
-				<Button>
-					<input type='submit' value='Log in' />
-				</Button>
-			</form>
+			<div className='container mt-2'>
+				<div className='row d-flex justify-content-center'>
+					<div className='col-md-8 col-sm-12'>
+						<form onSubmit={handleSubmit}>
+							<div class="form-group">
+								<label className='mt-1' htmlFor='login-email'>Email</label>
+								<input
+									className='form-control mx-sm-3'
+									id='login-email'
+									type='email'
+									onChange={(e) => setEmail(e.target.value)}
+								/>
+								<label className='mt-2' htmlFor='login-password'>Password</label>
+								<input
+									className='form-control mx-sm-3'
+									id='login-password'
+									type='password'
+									onChange={(e) => setPassword(e.target.value)}
+								/>
+								<button className='btn-login mt-4' type='submit' value='Log in'>
+									Login
+								</button>
+							</div>
+						</form>
+						<Link className='links' to='/register'>Make an account</Link>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };
