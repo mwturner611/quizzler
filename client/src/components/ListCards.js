@@ -4,7 +4,11 @@ import {ListGroup, ListGroupItem} from 'reactstrap';
 
 function ListCards(props) {
     return(
-    <ListGroupItem>Name: {props.keyword}, Subtitle: {props.definition}</ListGroupItem>
+        <div class="card">
+            <div class="card-body">
+            This is some text within a card body.
+            </div>
+        </div>
 				
     );
 }

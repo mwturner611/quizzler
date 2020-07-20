@@ -100,43 +100,47 @@ const Home = () => {
 					<h4 className='mt-4'>Your Decks</h4>
 					<ListGroup>
 						<TransitionGroup className='deck-list'>
-						<ListGroupItem>
+						<div className='mb-4 mt-3 d-flex justify-content-center'>
+							<ListGroupItem className='deck-form'>
 								<Form inline>
 									<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-										<Label for='Keyword' className='mr-sm-2'>
+										{/* <Label for='Keyword' className='mr-sm-2'>
 											Title
-										</Label>
+										</Label> */}
 										<Input
 											onChange={handleTitleChange}
 											type='text'
 											name='email'
 											id='keyword'
-											placeholder='Title the deck'
+											placeholder='Title'
 										/>
 									</FormGroup>
 									<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-										<Label for='examplePassword' className='mr-sm-2'>
+										{/* <Label for='examplePassword' className='mr-sm-2'>
 											Description
-										</Label>
+										</Label> */}
 										<Input
 											onChange={handleDescrChange}
 											type='text'
 											name='definition'
 											id='definition'
-											placeholder='Describe the deck'
+											placeholder='Description'
 										/>
 									</FormGroup>
 									<Button onClick={() => saveDeck(newDeck)}>Add New Deck</Button>
 								</Form>
 							</ListGroupItem>
+						</div>
 							{userDecks.map((deck) => (
 								<CSSTransition key={deck.id} timeout={500} classNames='fade'>
-									<ListGroupItem>
-										Name: {deck.name} Descr: {deck.descr}
-										<Button  onClick={() => cards(deck)}>Edit Cards</Button>
-										<Button  onClick={() => review(deck)}>Review Deck</Button>
-										<Button  onClick={() => removeDeck(deck._id)}>Delete Deck</Button>
-									</ListGroupItem>
+									<div className='mt-3 list-card'>
+										<ListGroupItem>
+											Name: {deck.name} Descr: {deck.descr}
+											<Button  onClick={() => cards(deck)}>Edit Cards</Button>
+											<Button  onClick={() => review(deck)}>Review Deck</Button>
+											<Button  onClick={() => removeDeck(deck._id)}>Delete Deck</Button>
+										</ListGroupItem>
+									</div>
 								</CSSTransition>
 							))}
 							
