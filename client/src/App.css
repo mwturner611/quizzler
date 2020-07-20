@@ -13,7 +13,7 @@ body{
 	color: skyblue;
 }
 
-.btn-register, .btn-login {
+.btn-register, .btn-login, .btn-decks {
 	background-color: #afabb8;
 	color: white;
 	border-radius: 5px;
@@ -24,7 +24,7 @@ body{
 	padding-right: 15px;
 }
 
-.deck-form {
+.deck-border, .btn-decks {
 	border: none;
 }
 

@@ -97,11 +97,11 @@ const Home = () => {
 				{userData.user ? (
 					<div>
 					<h1>Welcome {userData.user.displayName}!</h1>
-					<h4 className='mt-4'>Your Decks</h4>
+					<h4 className='mt-4 mb-2'>Your Decks</h4>
 					<ListGroup>
 						<TransitionGroup className='deck-list'>
 						<div className='mb-4 mt-3 d-flex justify-content-center'>
-							<ListGroupItem className='deck-form'>
+							<ListGroupItem className='deck-border'>
 								<Form inline>
 									<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
 										{/* <Label for='Keyword' className='mr-sm-2'>
@@ -127,18 +127,31 @@ const Home = () => {
 											placeholder='Description'
 										/>
 									</FormGroup>
-									<Button onClick={() => saveDeck(newDeck)}>Add New Deck</Button>
+									<Button className='' onClick={() => saveDeck(newDeck)}>Add New Deck</Button>
 								</Form>
 							</ListGroupItem>
 						</div>
 							{userDecks.map((deck) => (
 								<CSSTransition key={deck.id} timeout={500} classNames='fade'>
-									<div className='mt-3 list-card'>
-										<ListGroupItem>
-											Name: {deck.name} Descr: {deck.descr}
-											<Button  onClick={() => cards(deck)}>Edit Cards</Button>
-											<Button  onClick={() => review(deck)}>Review Deck</Button>
-											<Button  onClick={() => removeDeck(deck._id)}>Delete Deck</Button>
+									<div className='mb-3 mx-5 list-card'>
+										<ListGroupItem className='deck-border'>
+											<div className='row'>
+												<div className='col-md-8'>
+													<h3>{deck.name}</h3>
+													<p>{deck.descr}</p>
+												</div>
+												<div className='col-md-4'>
+													<div className='row'>
+														<div className='col-md-6'>
+															<Button className='btn-block btn-decks' onClick={() => cards(deck)}>Edit</Button>
+															<Button className='btn-block btn-decks' onClick={() => review(deck)}>Review</Button>
+														</div>
+														<div className='col-md-6'>
+															<Button className='btn-block btn-decks' onClick={() => removeDeck(deck._id)}>Delete</Button>
+														</div>
+													</div>
+												</div>
+											</div>
 										</ListGroupItem>
 									</div>
 								</CSSTransition>
