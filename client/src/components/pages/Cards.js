@@ -82,7 +82,7 @@ const Card = (props) => {
 
 
 	return (
-		<div>
+		<div className='text-center'>
 			<h1>{deckName}: Cards <Button onClick={() => review(deckID,deckName)} className='text-center'>Review Now!</Button></h1>
 			<ListGroup>
 				<TransitionGroup className='deck-list'>
