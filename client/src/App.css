@@ -24,12 +24,18 @@ body{
 	padding-right: 15px;
 }
 
-.deck-border, .btn-decks {
+.deck-border, .btn-decks, .deleteBtnStyle {
 	border: none;
 }
 
 .list-card {
 	box-shadow: 3px 5px 20px #bbbaba;
+	background-color: #f7f7f7;
+}
+
+.delete-btn {
+	width: 25px;
+	height: 25px;
 }
 
 * {

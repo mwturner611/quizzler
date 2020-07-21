@@ -14,6 +14,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useHistory, Link } from 'react-router-dom';
 import ReactCardFlip from 'react-card-flip';
 import cardImg from '../../images/flash-card.png';
+import ListCards from '../ListCards';
 
 const Home = () => {
 	const { userData } = useContext(UserContext);
@@ -96,7 +97,7 @@ const Home = () => {
 		    <div className='page text-center'>
 				{userData.user ? (
 					<div>
-					<h1>Welcome {userData.user.displayName}!</h1>
+					<h1>Welcome, {userData.user.displayName}!</h1>
 					<h4 className='mt-4 mb-2'>Your Decks</h4>
 					<ListGroup>
 						<TransitionGroup className='deck-list'>
@@ -133,27 +134,15 @@ const Home = () => {
 						</div>
 							{userDecks.map((deck) => (
 								<CSSTransition key={deck.id} timeout={500} classNames='fade'>
-									<div className='mb-3 mx-5 list-card'>
-										<ListGroupItem className='deck-border'>
-											<div className='row'>
-												<div className='col-md-8'>
-													<h3>{deck.name}</h3>
-													<p>{deck.descr}</p>
-												</div>
-												<div className='col-md-4'>
-													<div className='row'>
-														<div className='col-md-6'>
-															<Button className='btn-block btn-decks' onClick={() => cards(deck)}>Edit</Button>
-															<Button className='btn-block btn-decks' onClick={() => review(deck)}>Review</Button>
-														</div>
-														<div className='col-md-6'>
-															<Button className='btn-block btn-decks' onClick={() => removeDeck(deck._id)}>Delete</Button>
-														</div>
-													</div>
-												</div>
-											</div>
-										</ListGroupItem>
-									</div>
+									<ListCards
+									name={deck.name}
+									descr={deck.descr}
+									deck={deck}
+									id={deck._id}
+									cards={cards}
+									review={review}
+									removeDeck={removeDeck}
+									/>
 								</CSSTransition>
 							))}
 							
