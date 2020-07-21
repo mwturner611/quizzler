@@ -32,29 +32,29 @@ const Home = () => {
 			descr: deck.descr,
 		})
 			.then(() => {
-			findDecks()
-			resetForm()}
-			)
+				findDecks();
+				resetForm();
+			})
 			.catch((err) => console.log(err));
-	}
+	};
 
 	// reset form function
 	const resetForm = () => {
 		setNewTitle('');
 		setNewDescr('');
-	}
+	};
 
 	// collect what's entered in title field set state
 	const handleTitleChange = (event) => {
 		const entered = event.target.value;
 		setNewTitle(entered);
-	}
+	};
 
 	// collect what's entered in descr. field and set state
 	const handleDescrChange = (event) => {
 		const entered = event.target.value;
 		setNewDescr(entered);
-	}
+	};
 
 	// find decks
 	const findDecks = () => {
@@ -64,14 +64,14 @@ const Home = () => {
 				console.log(err);
 				setCheck(!check);
 			});
-	}
+	};
 
 	// delete a deck function
 	const removeDeck = (deckID) => {
 		API.deleteDeck(deckID)
 			.then(() => findDecks())
 			.catch((err) => console.log(err));
-	}
+	};
 
 	// go to a deck's card page
 	const cards = (deck) => {
@@ -93,14 +93,14 @@ const Home = () => {
 	}, [check]);
 
 	return (
-		    <div className='page text-center'>
-				{userData.user ? (
-					<div>
+		<div className='page text-center'>
+			{userData.user ? (
+				<div>
 					<h1>Welcome {userData.user.displayName}!</h1>
 					<h4 className='mt-4'>Your Decks</h4>
 					<ListGroup>
 						<TransitionGroup className='deck-list'>
-						<ListGroupItem>
+							<ListGroupItem className='my-1'>
 								<Form inline>
 									<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
 										<Label for='Keyword' className='mr-sm-2'>
@@ -132,26 +132,26 @@ const Home = () => {
 							{userDecks.map((deck) => (
 								<CSSTransition key={deck.id} timeout={500} classNames='fade'>
 									<ListGroupItem>
-										Name: {deck.name} Descr: {deck.descr}
-										<Button  onClick={() => cards(deck)}>Edit Cards</Button>
-										<Button  onClick={() => review(deck)}>Review Deck</Button>
-										<Button  onClick={() => removeDeck(deck._id)}>Delete Deck</Button>
+										<span className='bold'>Name:</span> {deck.name}{' '}
+										<span className='bold'>Descr:</span> {deck.descr}
+										<Button onClick={() => cards(deck)}>Edit Cards</Button>
+										<Button onClick={() => review(deck)}>Review Deck</Button>
+										<Button onClick={() => removeDeck(deck._id)}>Delete Deck</Button>
 									</ListGroupItem>
 								</CSSTransition>
 							))}
-							
 						</TransitionGroup>
 					</ListGroup>
 				</div>
 			) : (
 				<div className='container text-center mt-4'>
-					<img className='card-img mb-4' src={cardImg} alt='flash card icon'/>
+					<img className='card-img mb-4' src={cardImg} alt='flash card icon' />
 					<h2>Welcome to</h2>
 					<div className='row mt-4 d-flex justify-content-center'>
 						<div className='col-md-6 col-sm-12'>
 							<ReactCardFlip>
-								<div className="card w-100 text-center">
-									<div className="card-body">
+								<div className='card w-100 text-center'>
+									<div className='card-body'>
 										<h1 className='mt-5 mb-5'>Quizzler</h1>
 									</div>
 								</div>
@@ -160,12 +160,20 @@ const Home = () => {
 						</div>
 					</div>
 					<div className='row mt-3 d-flex justify-content-center'>
-						<p><Link className='links' to='/login'>Login</Link> or <Link className='links' to='/register'>Make An Account</Link></p>
+						<p>
+							<Link className='links' to='/login'>
+								Login
+							</Link>{' '}
+							or{' '}
+							<Link className='links' to='/register'>
+								Make An Account
+							</Link>
+						</p>
 					</div>
 				</div>
 			)}
 		</div>
 	);
-}
+};
 
 export default Home;

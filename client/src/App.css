@@ -1,19 +1,20 @@
 /* General Styling */
 
-body{
+body {
 	font-family: 'Montserrat', sans-serif;
 }
 
-.card-img{
+.card-img {
 	width: 75px;
 	height: 75px;
 }
 
-.links{
+.links {
 	color: skyblue;
 }
 
-.btn-register, .btn-login {
+.btn-register,
+.btn-login {
 	background-color: #afabb8;
 	color: white;
 	border-radius: 5px;
@@ -30,6 +31,12 @@ body{
 .container {
 	max-width: 900px;
 	margin: 0 auto;
+}
+/* Styling for button group label spans */
+.bold {
+	font-weight: bold;
+	padding: 0.3rem;
+	text-decoration: underline;
 }
 
 a {
@@ -101,4 +108,3 @@ ol {
 
 @media screen and (max-width: 550px) {
 }
-
