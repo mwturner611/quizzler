@@ -11,6 +11,7 @@ import {
 } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import ListCards from '../ListCards';
 
 
 const Card = (props) => {
@@ -85,43 +86,47 @@ const Card = (props) => {
 			<h1>{deckName}: Cards <Button onClick={() => review(deckID,deckName)} className='text-center'>Review Now!</Button></h1>
 			<ListGroup>
 				<TransitionGroup className='deck-list'>
-				<ListGroupItem>
+				<div className='mb-4 mt-3 d-flex justify-content-center'>
+					<ListGroupItem className='deck-border'>
 						<Form inline>
 							<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-								<Label for='Keyword' className='mr-sm-2'>
+								{/* <Label for='Keyword' className='mr-sm-2'>
 									Keyword
-								</Label>
+								</Label> */}
 								<Input
 									value={newKeyWord}
 									onChange={handleKeyWordChange}
 									type='input'
 									name='input'
 									id='keyword'
-									placeholder='New KeyWord'
+									placeholder='Keyword'
 								/>
 							</FormGroup>
 							<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-								<Label for='examplePassword' className='mr-sm-2'>
+								{/* <Label for='examplePassword' className='mr-sm-2'>
 									Definition
-								</Label>
+								</Label> */}
 								<Input
 									value={newDefinition}
 									onChange={handleDefinitionChange}
 									type='input'
 									name='definition'
 									id='definition'
-									placeholder='New Definition'
+									placeholder='Definition'
 								/>
 							</FormGroup>
 							<Button onClick={() => addCard(deckID, newCard)}>Add New Card</Button>
 						</Form>
 					</ListGroupItem>
+				</div>
                 {cards.map((card) => (
 						<CSSTransition key={card.id} timeout={500} classNames='fade'>
-							<ListGroupItem>
-								Keyword: {card.keyWord} Definition: {card.definition}
-								<Button onClick={() => removeCard(card._id)}>Delete</Button>
-							</ListGroupItem>
+							<ListCards
+							keyword={card.keyWord}
+							def={card.definition}
+							id={card._id}
+							removeCard={removeCard}
+							/>
 						</CSSTransition>
 					))}
 				</TransitionGroup>
