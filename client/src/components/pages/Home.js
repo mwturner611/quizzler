@@ -134,7 +134,7 @@ const Home = () => {
 											placeholder='Description'
 										/>
 									</FormGroup>
-									<Button className='' onClick={() => saveDeck(newDeck)}>Add New Deck</Button>
+									<Button onClick={() => saveDeck(newDeck)}>Add New Deck</Button>
 								</Form>
 							</ListGroupItem>
 						</div>
