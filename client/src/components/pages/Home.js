@@ -24,7 +24,7 @@ const Home = () => {
 	const [newTitle, setNewTitle] = useState('');
 	const [newDescr, setNewDescr] = useState('');
 	const newDeck = { name: newTitle, descr: newDescr };
-	const [check, setCheck] = useState(false);
+	// const [check, setCheck] = useState(false);
 
 	// save a new deck
 	const saveDeck = (deck) => {
@@ -63,7 +63,7 @@ const Home = () => {
 			.then((res) => setDecks(res.data))
 			.catch((err) => {
 				console.log(err);
-				setCheck(!check);
+				// setCheck(!check);
 			});
 	};
 
@@ -90,12 +90,8 @@ const Home = () => {
 	};
 
 	useEffect(() => {
-		// if(!userID){
-		// 	return;
-		// }else{
-		// findDecks()};
 		findDecks();
-	}, [check]);
+	}, []);
 
 	return (
 		<div className='page text-center'>

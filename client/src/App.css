@@ -97,7 +97,7 @@ ol {
 
 .fade-exit-active {
 	opacity: 0.01;
-	transition: opacity 1000ms ease-in;
+	transition: opacity 500ms ease-in;
 }
 
 /* Form styles */
