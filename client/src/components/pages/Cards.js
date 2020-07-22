@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import UserContext from '../../contexts/UserContext';
+import React, { useEffect, useState } from 'react';
 import API from '../../utils/Api';
 import {
 	ListGroup,
@@ -12,6 +11,7 @@ import {
 } from 'reactstrap';
 import { useHistory } from 'react-router-dom';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import ListCards from '../ListCards';
 
 const Card = (props) => {
 	const [cards, setCards] = useState([]);
@@ -81,7 +81,7 @@ const Card = (props) => {
 	}, [check]);
 
 	return (
-		<div>
+		<div className='text-center'>
 			<h1>
 				{deckName}: Cards{' '}
 				<Button onClick={() => review(deckID, deckName)} className='text-center'>
@@ -90,42 +90,47 @@ const Card = (props) => {
 			</h1>
 			<ListGroup>
 				<TransitionGroup className='deck-list'>
-					<ListGroupItem>
-						<Form inline>
-							<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-								<Label for='Keyword' className='mr-sm-2'>
-									<span className='bold'>Keyword</span>
-								</Label>
-								<Input
-									onChange={handleKeyWordChange}
-									type='input'
-									name='input'
-									id='keyword'
-									placeholder='New KeyWord'
-								/>
-							</FormGroup>
-							<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-								<Label for='examplePassword' className='mr-sm-2'>
-									<span className='bold'>Definition</span>
-								</Label>
-								<Input
-									onChange={handleDefinitionChange}
-									type='input'
-									name='definition'
-									id='definition'
-									placeholder='New Definition'
-								/>
-							</FormGroup>
-							<Button onClick={() => addCard(deckID, newCard)}>Add New Card</Button>
-						</Form>
-					</ListGroupItem>
+					<div className='mb-4 mt-3 d-flex justify-content-center'>
+						<ListGroupItem className='deck-border'>
+							<Form inline>
+								<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+									{/* <Label for='Keyword' className='mr-sm-2'>
+									Keyword
+								</Label> */}
+									<Input
+										value={newKeyWord}
+										onChange={handleKeyWordChange}
+										type='input'
+										name='input'
+										id='keyword'
+										placeholder='Keyword'
+									/>
+								</FormGroup>
+								<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+									{/* <Label for='examplePassword' className='mr-sm-2'>
+									Definition
+								</Label> */}
+									<Input
+										value={newDefinition}
+										onChange={handleDefinitionChange}
+										type='input'
+										name='definition'
+										id='definition'
+										placeholder='Definition'
+									/>
+								</FormGroup>
+								<Button onClick={() => addCard(deckID, newCard)}>Add New Card</Button>
+							</Form>
+						</ListGroupItem>
+					</div>
 					{cards.map((card) => (
 						<CSSTransition key={card.id} timeout={500} classNames='fade'>
-							<ListGroupItem>
-								<span className='bold'>Keyword:</span> {card.keyWord}{' '}
-								<span className='bold'>Definition:</span> {card.definition}
-								<Button onClick={() => removeCard(card._id)}>Delete</Button>
-							</ListGroupItem>
+							<ListCards
+								keyword={card.keyWord}
+								def={card.definition}
+								id={card._id}
+								removeCard={removeCard}
+							/>
 						</CSSTransition>
 					))}
 				</TransitionGroup>

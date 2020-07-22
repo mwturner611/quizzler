@@ -14,7 +14,8 @@ body {
 }
 
 .btn-register,
-.btn-login {
+.btn-login,
+.btn-decks {
 	background-color: #afabb8;
 	color: white;
 	border-radius: 5px;
@@ -23,6 +24,22 @@ body {
 .btn-login {
 	padding-left: 15px;
 	padding-right: 15px;
+}
+
+.deck-border,
+.btn-decks,
+.deleteBtnStyle {
+	border: none;
+}
+
+.list-card {
+	box-shadow: 3px 5px 20px #bbbaba;
+	background-color: #f7f7f7;
+}
+
+.delete-btn {
+	width: 25px;
+	height: 25px;
 }
 
 * {
@@ -107,4 +124,15 @@ ol {
 }
 
 @media screen and (max-width: 550px) {
+}
+
+.link {
+	text-decoration: underline;
+	text-decoration-color: blue;
+	color: blue;
+}
+
+.link:hover {
+	background-color: lightgrey;
+	cursor: pointer;
 }

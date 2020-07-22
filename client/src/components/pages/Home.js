@@ -14,6 +14,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useHistory, Link } from 'react-router-dom';
 import ReactCardFlip from 'react-card-flip';
 import cardImg from '../../images/flash-card.png';
+import ListDecks from '../ListDecks';
 
 const Home = () => {
 	const { userData } = useContext(UserContext);
@@ -89,6 +90,10 @@ const Home = () => {
 	};
 
 	useEffect(() => {
+		// if(!userID){
+		// 	return;
+		// }else{
+		// findDecks()};
 		findDecks();
 	}, [check]);
 
@@ -96,48 +101,54 @@ const Home = () => {
 		<div className='page text-center'>
 			{userData.user ? (
 				<div>
-					<h1>Welcome {userData.user.displayName}!</h1>
-					<h4 className='mt-4'>Your Decks</h4>
+					<h1>Welcome, {userData.user.displayName}!</h1>
+					<h4 className='mt-4 mb-2'>Your Decks</h4>
 					<ListGroup>
 						<TransitionGroup className='deck-list'>
-							<ListGroupItem className='my-1'>
-								<Form inline>
-									<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-										<Label for='Keyword' className='mr-sm-2'>
-											<span className='bold'>Title</span>
-										</Label>
-										<Input
-											onChange={handleTitleChange}
-											type='text'
-											name='email'
-											id='keyword'
-											placeholder='Title the deck'
-										/>
-									</FormGroup>
-									<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-										<Label for='examplePassword' className='mr-sm-2'>
-											<span className='bold'>Description</span>
-										</Label>
-										<Input
-											onChange={handleDescrChange}
-											type='text'
-											name='definition'
-											id='definition'
-											placeholder='Describe the deck'
-										/>
-									</FormGroup>
-									<Button onClick={() => saveDeck(newDeck)}>Add New Deck</Button>
-								</Form>
-							</ListGroupItem>
+							<div className='mb-4 mt-3 d-flex justify-content-center'>
+								<ListGroupItem className='deck-border'>
+									<Form inline>
+										<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+											{/* <Label for='Keyword' className='mr-sm-2'>
+											Title
+										</Label> */}
+											<Input
+												value={newTitle}
+												onChange={handleTitleChange}
+												type='text'
+												name='email'
+												id='keyword'
+												placeholder='Title'
+											/>
+										</FormGroup>
+										<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+											{/* <Label for='examplePassword' className='mr-sm-2'>
+											Description
+										</Label> */}
+											<Input
+												value={newDescr}
+												onChange={handleDescrChange}
+												type='text'
+												name='definition'
+												id='definition'
+												placeholder='Description'
+											/>
+										</FormGroup>
+										<Button onClick={() => saveDeck(newDeck)}>Add New Deck</Button>
+									</Form>
+								</ListGroupItem>
+							</div>
 							{userDecks.map((deck) => (
 								<CSSTransition key={deck.id} timeout={500} classNames='fade'>
-									<ListGroupItem>
-										<span className='bold'>Name:</span> {deck.name}{' '}
-										<span className='bold'>Descr:</span> {deck.descr}
-										<Button onClick={() => cards(deck)}>Edit Cards</Button>
-										<Button onClick={() => review(deck)}>Review Deck</Button>
-										<Button onClick={() => removeDeck(deck._id)}>Delete Deck</Button>
-									</ListGroupItem>
+									<ListDecks
+										name={deck.name}
+										descr={deck.descr}
+										deck={deck}
+										id={deck._id}
+										cards={cards}
+										review={review}
+										removeDeck={removeDeck}
+									/>
 								</CSSTransition>
 							))}
 						</TransitionGroup>

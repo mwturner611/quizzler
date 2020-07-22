@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import UserContext from '../../contexts/UserContext';
+import React, {useEffect, useState } from 'react';
 import API from '../../utils/Api';
 import {Button} from 'reactstrap';
 import CardFlips from '../CardFlips/CardFlips';
@@ -73,8 +72,8 @@ const Review = (props) => {
     }, [check]);
 
     return(
-        <div>
-            <h1 className='text-center mt-5'>Review - {deckName}  <Button onClick={() => cardsPage(deckID,deckName)} className='text-center'>Edit Cards</Button></h1>
+        <div className='page text-center'>
+            <h1 className='text-center mt-5'>Review - {deckName}</h1><a onClick={() => cardsPage(deckID,deckName)} className='text-center'><span className='link'>Edit this deck</span></a>
             
             <div className='container mt-5'>
                 <div className='row'>
