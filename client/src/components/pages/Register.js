@@ -45,7 +45,7 @@ const Register = () => {
 				<div className='row d-flex justify-content-center'>
 					<div className='col-md-8 col-sm-12'>
 						<form onSubmit={handleSubmit}>
-							<div class="form-group">
+							<div clasName='form-group'>
 								<label className='mt-1' htmlFor='register-email'>Email</label>
 								<input
 									className='form-control mx-sm-3'
@@ -54,7 +54,7 @@ const Register = () => {
 									onChange={(e) => setEmail(e.target.value)}
 								/>
 								<label className='mt-2 mb-n1' htmlFor='register-password'>Password</label><br></br>
-								<small class="text-muted">
+								<small className='text-muted'>
 								Must be at least 5 characters long.
 								</small>
 								<input

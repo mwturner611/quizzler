@@ -90,7 +90,10 @@ const Home = () => {
 	};
 
 	useEffect(() => {
-		findDecks();
+		if(!userID){
+			return;
+		}else{
+		findDecks()};
 	}, [check]);
 
 	return (
@@ -109,6 +112,7 @@ const Home = () => {
 											Title
 										</Label> */}
 										<Input
+											value={newTitle}
 											onChange={handleTitleChange}
 											type='text'
 											name='email'
@@ -121,6 +125,7 @@ const Home = () => {
 											Description
 										</Label> */}
 										<Input
+											value={newDescr}
 											onChange={handleDescrChange}
 											type='text'
 											name='definition'
@@ -156,8 +161,8 @@ const Home = () => {
 					<div className='row mt-4 d-flex justify-content-center'>
 						<div className='col-md-6 col-sm-12'>
 							<ReactCardFlip>
-								<div className="card w-100 text-center">
-									<div className="card-body">
+								<div className='card w-100 text-center'>
+									<div className='card-body'>
 										<h1 className='mt-5 mb-5'>Quizzler</h1>
 									</div>
 								</div>

@@ -116,3 +116,13 @@ ol {
 @media screen and (max-width: 550px) {
 }
 
+.link{
+	text-decoration: underline;
+	text-decoration-color: blue;
+	color:blue;
+}
+
+.link:hover {
+	background-color: lightgrey;
+	cursor: pointer;
+}

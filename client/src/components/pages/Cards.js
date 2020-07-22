@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import UserContext from '../../contexts/UserContext';
+import React, {useEffect, useState } from 'react';
 import API from '../../utils/Api';
 import {
     ListGroup,
@@ -93,6 +92,7 @@ const Card = (props) => {
 									Keyword
 								</Label>
 								<Input
+									value={newKeyWord}
 									onChange={handleKeyWordChange}
 									type='input'
 									name='input'
@@ -105,6 +105,7 @@ const Card = (props) => {
 									Definition
 								</Label>
 								<Input
+									value={newDefinition}
 									onChange={handleDefinitionChange}
 									type='input'
 									name='definition'
