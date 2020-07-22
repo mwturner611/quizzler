@@ -93,6 +93,7 @@ const Card = (props) => {
 									Keyword
 								</Label>
 								<Input
+									value={newKeyWord}
 									onChange={handleKeyWordChange}
 									type='input'
 									name='input'
@@ -105,6 +106,7 @@ const Card = (props) => {
 									Definition
 								</Label>
 								<Input
+									value={newDefinition}
 									onChange={handleDefinitionChange}
 									type='input'
 									name='definition'

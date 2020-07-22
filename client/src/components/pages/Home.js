@@ -90,7 +90,10 @@ const Home = () => {
 	};
 
 	useEffect(() => {
-		findDecks();
+		if(!userID){
+			return;
+		}else{
+		findDecks()};
 	}, [check]);
 
 	return (
@@ -109,6 +112,7 @@ const Home = () => {
 											Title
 										</Label> */}
 										<Input
+											value={newTitle}
 											onChange={handleTitleChange}
 											type='text'
 											name='email'
@@ -121,6 +125,7 @@ const Home = () => {
 											Description
 										</Label> */}
 										<Input
+											value={newDescr}
 											onChange={handleDescrChange}
 											type='text'
 											name='definition'
