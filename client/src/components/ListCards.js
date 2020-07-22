@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import {ListGroup, Button, ListGroupItem} from 'reactstrap';
+import React from 'react';
+import { Button, ListGroupItem} from 'reactstrap';
 import deleteImg from '../images/close.png';
 
 

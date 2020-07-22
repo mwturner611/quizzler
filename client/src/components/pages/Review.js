@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
-import UserContext from '../../contexts/UserContext';
+import React, {useEffect, useState } from 'react';
 import API from '../../utils/Api';
 import {Button} from 'reactstrap';
 import CardFlips from '../CardFlips/CardFlips';

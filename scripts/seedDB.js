@@ -1,9 +1,9 @@
-const mongoose = require("mongoose");
-const db = require("../models");
+const mongoose = require('mongoose');
+const db = require('../models');
 
 mongoose.connect(
     process.env.MONGODB_URI ||
-    "mongodb://localhost/quizzler"
+    'mongodb://localhost/quizzler'
   );
 
   const userSeed = [
@@ -50,113 +50,113 @@ const deckSeed = [
 const cardSeed = [
   {
     deckID:4,
-    keyWord:"Collections",
-    definition:"Collections' in Mongo are equivalent to tables in relational databses. They can hold multiple JSON documents"
+    keyWord:'Collections',
+    definition:'Collections' in Mongo are equivalent to tables in relational databses. They can hold multiple JSON documents'
   },
   {
     deckID:4,
-    keyWord:"Documents",
-    definition:"Documents are equivalent to records or rows of data in SQL. While a SQL row can reference data in other tables, Mongo documents usually combine that in a document"
+    keyWord:'Documents',
+    definition:'Documents are equivalent to records or rows of data in SQL. While a SQL row can reference data in other tables, Mongo documents usually combine that in a document'
   },
   {
     deckID:4,
-    keyWord:"Fields",
-    definition:"Fields or attributes are similar to columns in a SQL table."
+    keyWord:'Fields',
+    definition:'Fields or attributes are similar to columns in a SQL table.'
   },
   {
     deckID:4,
-    keyWord:"Schema",
-    definition:"While Mongo is schema-less, SQL defines a schema via the table definition.  A mongoose schema is a document data structure (or shape of the document) that is enforced via the application layer."
+    keyWord:'Schema',
+    definition:'While Mongo is schema-less, SQL defines a schema via the table definition.  A mongoose schema is a document data structure (or shape of the document) that is enforced via the application layer.'
   },
   {
     deckID:4,
-    keyWord:"Models",
-    definition:"Models are higher-order constructors that hake a schema and create an instance of a document equivalent to records in a relational databse."
+    keyWord:'Models',
+    definition:'Models are higher-order constructors that hake a schema and create an instance of a document equivalent to records in a relational databse.'
   },
   {
     deckID:1,
-    keyWord:"Tennessee",
-    definition:"Nashville"
+    keyWord:'Tennessee',
+    definition:'Nashville'
   },
   {
     deckID:1,
-    keyWord:"Mississippi",
-    definition:"Jackson"
+    keyWord:'Mississippi',
+    definition:'Jackson'
   },
   {
     deckID:1,
-    keyWord:"Alabama",
-    definition:"Montgomery"
+    keyWord:'Alabama',
+    definition:'Montgomery'
   },
   {
     deckID:1,
-    keyWord:"Alaska",
-    definition:"Juneau"
+    keyWord:'Alaska',
+    definition:'Juneau'
   },
   {
     deckID:1,
-    keyWord:"Arizona",
-    definition:"Phoenix"
+    keyWord:'Arizona',
+    definition:'Phoenix'
   },
   {
     deckID:2,
-    keyWord:"Hawkeye",
-    definition:"Clint Barton"
+    keyWord:'Hawkeye',
+    definition:'Clint Barton'
   },
   {
     deckID:2,
-    keyWord:"Green Lantern",
-    definition:"Hal Jordan"
+    keyWord:'Green Lantern',
+    definition:'Hal Jordan'
   },
   {
     deckID:2,
-    keyWord:"Black Panter",
-    definition:"King T'Challa"
+    keyWord:'Black Panter',
+    definition:'King T'Challa'
   },
   {
     deckID:2,
-    keyWord:"Captain America",
-    definition:"Steve Rogers"
+    keyWord:'Captain America',
+    definition:'Steve Rogers'
   },
   {
     deckID:2,
-    keyWord:"The Flash",
-    definition:"Barry Allen"
+    keyWord:'The Flash',
+    definition:'Barry Allen'
   },
   {
     deckID:2,
-    keyWord:"Daredevil",
-    definition:"Matt Murdock"
+    keyWord:'Daredevil',
+    definition:'Matt Murdock'
   },
   {
     deckID:2,
-    keyWord:"Iron Man",
-    definition:"Tony Stark"
+    keyWord:'Iron Man',
+    definition:'Tony Stark'
   },
   {
     deckID:3,
-    keyWord:"H",
-    definition:"Hydrogen"
+    keyWord:'H',
+    definition:'Hydrogen'
   },
   {
     deckID:3,
-    keyWord:"He",
-    definition:"Helium"
+    keyWord:'He',
+    definition:'Helium'
   },
   {
     deckID:3,
-    keyWord:"Li",
-    definition:"Lithium"
+    keyWord:'Li',
+    definition:'Lithium'
   },
   {
     deckID:3,
-    keyWord:"Be",
-    definition:"Beryllium"
+    keyWord:'Be',
+    definition:'Beryllium'
   },
   {
     deckID:3,
-    keyWord:"B",
-    definition:"Boron"
+    keyWord:'B',
+    definition:'Boron'
   }
 
 ];
@@ -165,7 +165,7 @@ const cardSeed = [
   .remove({})
   .then(() => db.User.collection.insertMany(userSeed))
   .then(data => {
-    console.log(data.result.n + " records inserted!");
+    console.log(data.result.n + ' records inserted!');
     process.exit(0);
   })
   .catch(err => {
@@ -177,7 +177,7 @@ const cardSeed = [
   .remove({})
   .then(() => db.Card.collection.insertMany(cardSeed))
   .then(data => {
-    console.log(data.result.n + " records inserted!");
+    console.log(data.result.n + ' records inserted!');
     process.exit(0);
   })
   .catch(err => {
@@ -189,7 +189,7 @@ const cardSeed = [
   .remove({})
   .then(() => db.Deck.collection.insertMany(deckSeed))
   .then(data => {
-    console.log(data.result.n + " records inserted!");
+    console.log(data.result.n + ' records inserted!');
     process.exit(0);
   })
   .catch(err => {

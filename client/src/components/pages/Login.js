@@ -41,7 +41,7 @@ const Login = () => {
 				<div className='row d-flex justify-content-center'>
 					<div className='col-md-8 col-sm-12'>
 						<form onSubmit={handleSubmit}>
-							<div class="form-group">
+							<div className='form-group'>
 								<label className='mt-1' htmlFor='login-email'>Email</label>
 								<input
 									className='form-control mx-sm-3'
