@@ -14,7 +14,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { useHistory, Link } from 'react-router-dom';
 import ReactCardFlip from 'react-card-flip';
 import cardImg from '../../images/flash-card.png';
-import ListCards from '../ListCards';
+import ListDecks from '../ListDecks';
 
 const Home = () => {
 	const { userData } = useContext(UserContext);
@@ -90,10 +90,11 @@ const Home = () => {
 	};
 
 	useEffect(() => {
-		if(!userID){
-			return;
-		}else{
-		findDecks()};
+		// if(!userID){
+		// 	return;
+		// }else{
+		// findDecks()};
+		findDecks();
 	}, [check]);
 
 	return (
@@ -139,7 +140,7 @@ const Home = () => {
 						</div>
 							{userDecks.map((deck) => (
 								<CSSTransition key={deck.id} timeout={500} classNames='fade'>
-									<ListCards
+									<ListDecks
 									name={deck.name}
 									descr={deck.descr}
 									deck={deck}
@@ -150,7 +151,6 @@ const Home = () => {
 									/>
 								</CSSTransition>
 							))}
-							
 						</TransitionGroup>
 					</ListGroup>
 				</div>
