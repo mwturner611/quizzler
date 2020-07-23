@@ -51,7 +51,7 @@ const cardSeed = [
   {
     deckID:4,
     keyWord:'Collections',
-    definition:'Collections' in Mongo are equivalent to tables in relational databses. They can hold multiple JSON documents'
+    definition:'Collections in Mongo are equivalent to tables in relational databses. They can hold multiple JSON documents'
   },
   {
     deckID:4,
@@ -111,7 +111,7 @@ const cardSeed = [
   {
     deckID:2,
     keyWord:'Black Panter',
-    definition:'King T'Challa'
+    definition:'King T`Challa'
   },
   {
     deckID:2,

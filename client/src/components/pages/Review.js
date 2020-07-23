@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import API from '../../utils/Api';
 import { Button } from 'reactstrap';
-import CardFlips from '../CardFlips/CardFlips';
+import CardFlips from '../CardFlips';
 import { Link } from 'react-router-dom';
 import { SwitchTransition, CSSTransition } from 'react-transition-group';
 import { useHistory } from 'react-router-dom';
