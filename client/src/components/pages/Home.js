@@ -105,9 +105,6 @@ const Home = () => {
 								<ListGroupItem className='deck-border'>
 									<Form inline>
 										<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-											{/* <Label for='Keyword' className='mr-sm-2'>
-											Title
-										</Label> */}
 											<Input
 												value={newTitle}
 												onChange={handleTitleChange}
@@ -118,9 +115,6 @@ const Home = () => {
 											/>
 										</FormGroup>
 										<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-											{/* <Label for='examplePassword' className='mr-sm-2'>
-											Description
-										</Label> */}
 											<Input
 												value={newDescr}
 												onChange={handleDescrChange}
