@@ -24,7 +24,7 @@ const Home = () => {
 	const [newTitle, setNewTitle] = useState('');
 	const [newDescr, setNewDescr] = useState('');
 	const newDeck = { name: newTitle, descr: newDescr };
-	const [check, setCheck] = useState(false);
+	// const [check, setCheck] = useState(false);
 
 	// save a new deck
 	const saveDeck = (deck) => {
@@ -33,29 +33,29 @@ const Home = () => {
 			descr: deck.descr,
 		})
 			.then(() => {
-			findDecks()
-			resetForm()}
-			)
+				findDecks();
+				resetForm();
+			})
 			.catch((err) => console.log(err));
-	}
+	};
 
 	// reset form function
 	const resetForm = () => {
 		setNewTitle('');
 		setNewDescr('');
-	}
+	};
 
 	// collect what's entered in title field set state
 	const handleTitleChange = (event) => {
 		const entered = event.target.value;
 		setNewTitle(entered);
-	}
+	};
 
 	// collect what's entered in descr. field and set state
 	const handleDescrChange = (event) => {
 		const entered = event.target.value;
 		setNewDescr(entered);
-	}
+	};
 
 	// find decks
 	const findDecks = () => {
@@ -63,16 +63,16 @@ const Home = () => {
 			.then((res) => setDecks(res.data))
 			.catch((err) => {
 				console.log(err);
-				setCheck(!check);
+				// setCheck(!check);
 			});
-	}
+	};
 
 	// delete a deck function
 	const removeDeck = (deckID) => {
 		API.deleteDeck(deckID)
 			.then(() => findDecks())
 			.catch((err) => console.log(err));
-	}
+	};
 
 	// go to a deck's card page
 	const cards = (deck) => {
@@ -90,64 +90,60 @@ const Home = () => {
 	};
 
 	useEffect(() => {
-		// if(!userID){
-		// 	return;
-		// }else{
-		// findDecks()};
 		findDecks();
-	}, [check]);
+	}, []);
 
 	return (
-		    <div className='page text-center'>
-				{userData.user ? (
-					<div>
+		<div className='page text-center'>
+			{userData.user ? (
+				<div>
 					<h1>Welcome, {userData.user.displayName}!</h1>
 					<h4 className='mt-4 mb-2'>Your Decks</h4>
 					<ListGroup>
 						<TransitionGroup className='deck-list'>
-						<div className='mb-4 mt-3 d-flex justify-content-center'>
-							<ListGroupItem className='deck-border'>
-								<Form inline>
-									<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-										{/* <Label for='Keyword' className='mr-sm-2'>
+							<div className='mb-4 mt-3 d-flex justify-content-center'>
+								<ListGroupItem className='deck-border'>
+									<Form inline>
+										<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+											{/* <Label for='Keyword' className='mr-sm-2'>
 											Title
 										</Label> */}
-										<Input
-											value={newTitle}
-											onChange={handleTitleChange}
-											type='text'
-											name='email'
-											id='keyword'
-											placeholder='Title'
-										/>
-									</FormGroup>
-									<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
-										{/* <Label for='examplePassword' className='mr-sm-2'>
+											<Input
+												value={newTitle}
+												onChange={handleTitleChange}
+												type='text'
+												name='email'
+												id='keyword'
+												placeholder='Title'
+											/>
+										</FormGroup>
+										<FormGroup className='mb-2 mr-sm-2 mb-sm-0'>
+											{/* <Label for='examplePassword' className='mr-sm-2'>
 											Description
 										</Label> */}
-										<Input
-											value={newDescr}
-											onChange={handleDescrChange}
-											type='text'
-											name='definition'
-											id='definition'
-											placeholder='Description'
-										/>
-									</FormGroup>
-									<Button onClick={() => saveDeck(newDeck)}>Add New Deck</Button>
-								</Form>
-							</ListGroupItem>
-						</div>
+											<Input
+												value={newDescr}
+												onChange={handleDescrChange}
+												type='text'
+												name='definition'
+												id='definition'
+												placeholder='Description'
+											/>
+										</FormGroup>
+										<Button onClick={() => saveDeck(newDeck)}>Add New Deck</Button>
+									</Form>
+								</ListGroupItem>
+							</div>
 							{userDecks.map((deck) => (
 								<CSSTransition key={deck.id} timeout={500} classNames='fade'>
 									<ListDecks
-									name={deck.name}
-									descr={deck.descr}
-									deck={deck}
-									id={deck._id}
-									cards={cards}
-									review={review}
-									removeDeck={removeDeck}
+										name={deck.name}
+										descr={deck.descr}
+										deck={deck}
+										id={deck._id}
+										cards={cards}
+										review={review}
+										removeDeck={removeDeck}
 									/>
 								</CSSTransition>
 							))}
@@ -156,7 +152,7 @@ const Home = () => {
 				</div>
 			) : (
 				<div className='container text-center mt-4'>
-					<img className='card-img mb-4' src={cardImg} alt='flash card icon'/>
+					<img className='card-img mb-4' src={cardImg} alt='flash card icon' />
 					<h2>Welcome to</h2>
 					<div className='row mt-4 d-flex justify-content-center'>
 						<div className='col-md-6 col-sm-12'>
@@ -171,12 +167,20 @@ const Home = () => {
 						</div>
 					</div>
 					<div className='row mt-3 d-flex justify-content-center'>
-						<p><Link className='links' to='/login'>Login</Link> or <Link className='links' to='/register'>Make An Account</Link></p>
+						<p>
+							<Link className='links' to='/login'>
+								Login
+							</Link>{' '}
+							or{' '}
+							<Link className='links' to='/register'>
+								Make An Account
+							</Link>
+						</p>
 					</div>
 				</div>
 			)}
 		</div>
 	);
-}
+};
 
 export default Home;

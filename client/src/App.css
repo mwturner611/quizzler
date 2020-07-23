@@ -1,19 +1,21 @@
 /* General Styling */
 
-body{
+body {
 	font-family: 'Montserrat', sans-serif;
 }
 
-.card-img{
+.card-img {
 	width: 75px;
 	height: 75px;
 }
 
-.links{
+.links {
 	color: skyblue;
 }
 
-.btn-register, .btn-login, .btn-decks {
+.btn-register,
+.btn-login,
+.btn-decks {
 	background-color: #afabb8;
 	color: white;
 	border-radius: 5px;
@@ -24,7 +26,9 @@ body{
 	padding-right: 15px;
 }
 
-.deck-border, .btn-decks, .deleteBtnStyle {
+.deck-border,
+.btn-decks,
+.deleteBtnStyle {
 	border: none;
 }
 
@@ -44,6 +48,12 @@ body{
 .container {
 	max-width: 900px;
 	margin: 0 auto;
+}
+/* Styling for button group label spans */
+.bold {
+	font-weight: bold;
+	padding: 0.3rem;
+	text-decoration: underline;
 }
 
 a {
@@ -87,7 +97,7 @@ ol {
 
 .fade-exit-active {
 	opacity: 0.01;
-	transition: opacity 1000ms ease-in;
+	transition: opacity 500ms ease-in;
 }
 
 /* Form styles */
@@ -116,10 +126,10 @@ ol {
 @media screen and (max-width: 550px) {
 }
 
-.link{
+.link {
 	text-decoration: underline;
 	text-decoration-color: blue;
-	color:blue;
+	color: blue;
 }
 
 .link:hover {
