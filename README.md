@@ -23,6 +23,9 @@ MongoDB, Mongoose, Node.JS, Express, Heroku, React, React Router, Reactstrap, Bc
 * [Contributing](#contributing)
 * [Contacts](#contacts)
 
+## Demo
+<img src="client/src/images/demo.gif">
+
 ## Usage 
 1. Register as a user or login
 2. On the home page manage view/delete existing flash card decks or create new decks
