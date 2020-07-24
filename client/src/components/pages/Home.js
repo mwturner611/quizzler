@@ -151,7 +151,7 @@ const Home = () => {
 					<div className='row mt-4 d-flex justify-content-center'>
 						<div className='col-md-6 col-sm-12'>
 							<ReactCardFlip>
-								<div className='card w-100 text-center'>
+								<div className='card w-100 text-center flipCards'>
 									<div className='card-body'>
 										<h1 className='mt-5 mb-5'>Quizzler</h1>
 									</div>
